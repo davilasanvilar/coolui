@@ -1,5 +1,9 @@
 import React, { MouseEventHandler } from 'react';
+import styled from 'styled-components';
 import { ButtonType } from '../../types/types';
+
+const ButtonStyled = styled.button`
+`;
 
 export function ButtonBase({ clickFun, className, children, type }: {
     clickFun: MouseEventHandler<HTMLButtonElement>, className?: string, children?: JSX.Element | JSX.Element[], type?: ButtonType

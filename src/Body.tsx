@@ -2,12 +2,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Loading } from './components/atom/Loading';
 import { Header } from './components/organism/Header';
 import { useAuth } from './hooks/useAuth';
-import { Inicio } from './routes/Inicio';
+import { Inicio } from './screens/Inicio';
 import { LoadingScreen } from './components/organism/LoadingScreen';
 import styled from 'styled-components';
-import { LoginScreen } from './routes/LoginScreen';
+import { LoginScreen } from './screens/LoginScreen';
 import { CoolModal } from './components/organism/CoolModal';
 import { ConfirmationModal } from './components/organism/ConfirmationModal';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 
 const MainBox = styled.div`
@@ -20,6 +21,7 @@ const MainBox = styled.div`
 function Body() {
 
   const authInfo = useAuth()
+
 
   return (
     <MainBox>

@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext } from 'react';
-import { User } from '../types/entities';
+import { Test, User } from '../types/entities';
+import { Page } from '../types/types';
 import { conf } from './../conf'
 
 export interface ApiContext {
@@ -7,6 +8,7 @@ export interface ApiContext {
     logout: () => void
     fakeDelay: (delay: number) => void
     getUserInfo: () => Promise<User>
+    getTestData: (page: number) => Promise<Page<Test>>
 }
 
 const ApiContext = createContext<ApiContext>({} as any)
@@ -25,7 +27,7 @@ export const useApi = () => {
 export const ApiProvider = ({ children }: { children: ReactNode }) => {
 
     function fakeDelay(delay: number) {
-        return new Promise( res => setTimeout(res, delay) );
+        return new Promise(res => setTimeout(res, delay));
     }
 
     const login = async (user: string, password: string) => {
@@ -93,12 +95,86 @@ export const ApiProvider = ({ children }: { children: ReactNode }) => {
         return { id: '123', name: 'david@notacool.com', pass: '1234' }
     }
 
+    const getTestData = async (page: number): Promise<Page<Test>> => {
+        const content1: Test[] = [{id: '2', name: 'Javi', lastname: 'Vilasanchez', date: '29/10/94' },
+        { id: '4',name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' }]
+        const content2: Test[] = [{ name: 'Paco', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'Pepe', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'Manolo', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' },
+        { name: 'David', lastname: 'Vilasanchez', date: '29/10/94' }]
+
+        await fakeDelay(2000)
+        if (page === 0) {
+            return { content: content1, page: 0, totalPages: 3 }
+        } else {
+            if (page === 1) {
+                return { content: content1, page: 1, totalPages: 3 }
+            } else {
+                return { content: content2, page: 2, totalPages: 3 }
+            }
+        }
+    }
+
+
+
 
     const value: ApiContext = {
-        login, 
-        logout, 
+        login,
+        logout,
         getUserInfo,
-        fakeDelay
+        fakeDelay,
+        getTestData
     }
 
     return (

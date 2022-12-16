@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 
 const StyledText = styled.p`
-    font-size: ${props => props.theme.fontSize.h1};
+    font-size: 1.4rem;
     color: ${props => props.theme.color.darkFont};
     text-align: center;
     display: flex;
@@ -21,15 +21,13 @@ const StyledText = styled.p`
 
 export function ConfirmationModal() {
 
-    const [modalInfo, setModalInfo] = useRecoilState<ModalAtomProps>(modalAtom)
     const [confirmationModalInfo, setConfirmationModalInfo] = useRecoilState(confirmationModal)
 
-    const [confirmationText, setConfirmationText] = useState<string | undefined>(undefined)
     const [isLoadingState, setIsLoadingState] = useRecoilState<boolean>(isLoading)
 
     const onConfirm = async () => {
         setIsLoadingState(() => true)
-        const onConfirm = modalInfo.params?.onConfirm
+        const onConfirm = confirmationModalInfo.params?.onConfirm
         try {
             if (onConfirm) {
                 await onConfirm()
@@ -48,14 +46,14 @@ export function ConfirmationModal() {
 
     const buttons: ModalButton[] = [
         { type: ButtonType.CANCEL, onClick: onClear },
-        { type: ButtonType.CONFIRM, onClick: onClear },
+        { type: ButtonType.CONFIRM, onClick: onConfirm },
 
     ]
 
 
     return (
         confirmationModalInfo.visible ?
-            <ModalBase size={SizeEnum.XS} buttons={buttons} onClose={() => { onClear() }}>
+            <ModalBase title={confirmationModalInfo.title} size={SizeEnum.S} buttons={buttons} onClose={() => { onClear() }}>
                 {confirmationModalInfo.params?.body ?
                     <StyledText>
                         {confirmationModalInfo.params.body}

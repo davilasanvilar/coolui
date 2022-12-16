@@ -28,7 +28,6 @@ const MainBox = styled.div`
 export function Header() {
     const navigate = useNavigate()
     const [modalInfo, setModalInfo] = useRecoilState(modalAtom)
-    const [confirmationModalInfo, setConfirmationModalInfo] = useRecoilState(confirmationModal)
 
     return (
         <MainBox>

@@ -8,3 +8,10 @@ export interface Rol {
   id: string;
   name?: string;
 }
+
+export interface Test {
+  id?: string;
+  name?: string;
+  lastname?: string;
+  date?: string;
+}

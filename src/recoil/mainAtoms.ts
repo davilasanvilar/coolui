@@ -14,7 +14,7 @@ export interface ConfirmationModalProps {
 
 export const confirmationModal = atom<ConfirmationModalProps>({
   key: "confirmationModal",
-  default: { visible: false, title:''},
+  default: { visible: false, params: {body:'¿Quiere confirmar esto?'}},
 });
 
 export interface ModalAtomProps {
@@ -32,6 +32,11 @@ export interface ModalParams {
 export const modalAtom = atom<ModalAtomProps>({
   key: "modalAtom",
   default: { visible: false, title:'', type: undefined},
+});
+
+export const clearContextAtom = atom<boolean>({
+  key: "clearContextAtom",
+  default: false,
 });
 
 

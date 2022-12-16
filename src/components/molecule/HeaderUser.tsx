@@ -58,9 +58,8 @@ const LogoutButton = styled(ButtonBase)`
     &:hover {
     transition: border-color .2s, color .2s;
         border: 3px solid #E1A600;
-        color: #E1A600;
-
-
+        color: ${props => props.theme.color.highlightColor};
+        border-color: ${props => props.theme.color.highlightColor};
     }`;
 
 export function HeaderUser() {

@@ -16,7 +16,7 @@ const MainBox = styled.div`
     top: 0;
     background: ${props => props.theme.color.mainColor};
     box-sizing: border-box;
-    z-index: 5;
+    z-index: 80;
     padding: 1% 2%;
     width: 100%;
     height: 100%;

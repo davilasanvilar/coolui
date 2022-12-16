@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
-import styled, { DefaultTheme } from 'styled-components';
+import styled, { DefaultTheme, keyframes } from 'styled-components';
 import { SizeEnum } from '../../types/types';
 import { ModalButton } from '../../types/types'
 import { CoolButton } from '../atom/CoolButton';
 import { CgCloseR } from 'react-icons/cg';
+import { device } from '../../StyledTheme';
 
 
 const MainBox = styled.div`
@@ -11,9 +12,10 @@ const MainBox = styled.div`
     position: absolute;
     top: 0;
     height: 100vh;
-    background: ${props => props.theme.color.mainColorLowOp};
+    background: ${props => props.theme.color.modalBackground};
     backdrop-filter: blur(5px);
     display: flex;
+    z-index: 40;
     justify-content:center;
 
 `;
@@ -43,34 +45,52 @@ const getSize = (size?: SizeEnum): SizeInfo => {
     }
 }
 
+const insideModalAnimation = keyframes`
+  from {
+    transform: scale(0);
+    }
+
+  to {
+    transform: scale(1);
+  }  
+`
 
 const InsideBox = styled.div<ModalProps>`
-    width: ${props => `${getSize(props.size).height}%`};
+    animation: ${insideModalAnimation};
+    animation-duration: 0.2s;
+    width: ${props => `${getSize(props.size).width}%`};
     margin-top: 20vh;
     min-width: 320px;
     max-height: ${props => `${getSize(props.size).maxHeight}px`};
     height: ${props => `${getSize(props.size).height}vh`};
     display: flex;
     flex-direction: column;
+    max-width: ${props => props.size === SizeEnum.S ? '425px' : undefined};
     background: ${props => props.theme.color.lightBackground};
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;`;
 
 const ModalHeader = styled.div<ModalProps>`
     width:100%;
-    height: 60px;
+    height: 4vh;
+    min-height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     padding: 0 5%;
     background: ${props => props.theme.color.mainColor};
-    & h1 {
+    & h2 {
         color: ${props => props.theme.color.lightFont};
-        font-size: ${props => props.theme.fontSize.h1}
+        @media ${device.laptop} { 
+            font-size: ${props => props.theme.fontSize.h2}
+        }
+        @media ${device.desktopL} { 
+            font-size: 2rem
+        }
+
     }
     & button {
         color: ${props => props.theme.color.lightFont};
-        font-size: ${props => props.theme.fontSize.h1};
         font-size: 2rem;
         background: none;
         border: none;
@@ -81,7 +101,7 @@ const ModalHeader = styled.div<ModalProps>`
     }
     & button:hover {
         transition: color .1s;
-        color: ${props => props.theme.color.secondColor};
+        color: ${props => props.theme.color.highlightColor};
 
     }
 `;
@@ -115,12 +135,10 @@ export function ModalBase({ children, title, size, onClose, buttons }: { childre
         <MainBox>
 
             <InsideBox size={size} >
-                {title ?
-                    <ModalHeader size={size} >
-                        <h1>{title}</h1>
-                        <button id='modalCloseBut' onClick={() => { onClose() }}><CgCloseR /></button>
-                    </ModalHeader>
-                    : undefined}
+                <ModalHeader size={size} >
+                    <h2>{title}</h2>
+                    <button id='modalCloseBut' onClick={() => { onClose() }}><CgCloseR /></button>
+                </ModalHeader>
                 {children ?
                     <ModalBody size={size}>
                         {children}

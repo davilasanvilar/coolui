@@ -4,6 +4,7 @@ import { ButtonType, SizeEnum } from '../../types/types';
 import { ButtonBase } from './ButtonBase';
 import { MdOutlineCancel } from 'react-icons/md'
 import { BsCheck } from 'react-icons/bs'
+import { device } from '../../StyledTheme';
 
 
 interface CoolStyledButtonProps {
@@ -26,6 +27,12 @@ const CoolStyledButton = styled(ButtonBase) <CoolStyledButtonProps>`
     align-items: center;
     justify-content: space-around;
     overflow: hidden;
+    @media ${device.desktopL} { 
+        width: ${props => `${1.2 * props.width}px`};
+        height: ${props => `${1.2 * props.height}px`};
+    }
+
+
 
     & svg {
         font-size: 2rem;
@@ -60,13 +67,13 @@ export function CoolButton({ clickFun, className, type, size }: {
             case ButtonType.SAVE:
                 return { icon: <></>, label: 'Guardar' }
             case ButtonType.CANCEL:
-                return { icon: <MdOutlineCancel/>, label: 'Cancelar' }
+                return { icon: <MdOutlineCancel />, label: 'Cancelar' }
             case ButtonType.DELETE:
                 return { icon: <></>, label: 'Borrar' }
             case ButtonType.EDIT:
                 return { icon: <></>, label: 'Editar' }
             case ButtonType.CONFIRM:
-                return { icon: <BsCheck/>, label: 'Confirmar' }
+                return { icon: <BsCheck />, label: 'Confirmar' }
             default:
                 return { icon: <></>, label: 'Guardar' }
         }
@@ -81,7 +88,7 @@ export function CoolButton({ clickFun, className, type, size }: {
             case SizeEnum.S:
                 return { width: 120, height: 50, fontSize: '1.2rem' }
             case SizeEnum.XS:
-                return { width: 110, height: 40, fontSize: '1rem' }
+                return { width: 100, height: 30, fontSize: '.9rem' }
             default:
                 return { width: 120, height: 50, fontSize: '1.2rem' }
         }
