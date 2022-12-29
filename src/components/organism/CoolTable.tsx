@@ -33,6 +33,7 @@ const MainBox = styled.div<SizeProps>`
 const TableBox = styled.div<TableProps>`
     width: 100% ;
     height: 100% ;
+    position: relative;
     overflow: ${(props) => `${props.contextVisible ? 'auto' : 'auto'}`};
 `;
 
@@ -110,17 +111,22 @@ const opacity = keyframes`
   }
 `;
 
-const LoadingIconBlur = styled.div`
+const LoadingIconBlur = styled.div<SizeProps>`
     width: 100%;
     top:0;
     animation-name: ${opacity};
     animation-duration: 0.5s;
-    height: 100%;
     background: ${props => props.theme.color.modalBackground};
-    position: absolute;
+    position: sticky;
+    opacity: .4;
     display: flex;
     justify-content: center;
-    align-items: center;`
+    align-items: center;
+    height: ${(props) => `${props.heightProp !== undefined ? props.heightProp : 60}vh`} ;
+    z-index:100;
+    margin-top: ${(props) => `-${props.heightProp !== undefined ? props.heightProp : 60}vh`} ;
+`
+
 
 const LoadingIconBox = styled.div`
     width: 100%;
@@ -130,6 +136,8 @@ const LoadingIconBox = styled.div`
 const LoadingIconInsideBox = styled.div`
     width: 100%;
     position: sticky;
+    display: flex;
+    justify-content: center;
     top: 50%;`
 
 
@@ -170,6 +178,15 @@ export function CoolTable({ width, height, headers, data, setPage, contextOption
     return (
         <MainBox widthProp={width} heightProp={height}>
             <TableBox contextVisible={contextMenuProps.visible}>
+                {true ?
+                    <LoadingIconBlur widthProp={width} heightProp={height}>
+                        <LoadingIconBox>
+                            <LoadingIconInsideBox>
+                                <PulseLoader size={30} color={theme.color.bgColor} />
+                            </LoadingIconInsideBox>
+                        </LoadingIconBox>
+                    </LoadingIconBlur>
+                    : undefined}
                 <StyledTable>
                     <thead>
                         <tr>
@@ -188,15 +205,6 @@ export function CoolTable({ width, height, headers, data, setPage, contextOption
                                 )}
                             </RowSelectedStyle>)
                             : <></>}
-                        {isLoading ?
-                            <LoadingIconBlur>
-                                <LoadingIconBox>
-                                    <LoadingIconInsideBox>
-                                        <PulseLoader size={30} color={theme.color.bgColor} />
-                                    </LoadingIconInsideBox>
-                                </LoadingIconBox>
-                            </LoadingIconBlur>
-                            : undefined}
                     </StyledTableBody>
                 </StyledTable>
             </TableBox>
