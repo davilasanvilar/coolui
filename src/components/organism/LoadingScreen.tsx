@@ -31,7 +31,7 @@ export function LoadingScreen() {
     return (
         <MainBox>
             <img src={loadingScreenImg} alt='Imagen cargando página' style={{ cursor: 'pointer' }}></img>
-            <PuffLoader color={theme.color.lightFont} loading={true} size={90}  />
+            <PuffLoader color={theme.color.lightFont} loading size={90}  />
         </MainBox>
     )
 }

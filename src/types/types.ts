@@ -4,7 +4,7 @@ export interface Page<T> {
   content: T[];
 }
 
-export enum State {
+export enum StateEnum {
   BORRADOR = "borrador",
   ENVIADA = "enviada",
 }
@@ -23,7 +23,7 @@ export enum SizeEnum {
   XL,
 }
 
-export enum ButtonType {
+export enum ButtonTypeEnum {
   SAVE,
   CANCEL,
   EDIT,
@@ -31,18 +31,36 @@ export enum ButtonType {
   CONFIRM,
 }
 
-export enum ContextOptionEnum {
-  EDIT,
-  DELETE,
+export enum IconTypeEnum {
+    PREVIOUS,
+    NEXT,
+    LOGOUT,
+    CANCEL,
+    CONFIRM,
+    CLOSE,
+    USER,
+    LOGIN,
+    DELETE,
+    EDIT
 }
 
+export enum ColorEnum {
+  DANGER='danger'
+}
+
+export interface SelectOption {
+  label:string
+  value:string
+}
+
+
 export interface ContextOption {
-  type: ContextOptionEnum;
+  type: IconTypeEnum;
   onClick: (ids:string[]) => void;
 }
 
 export interface ModalButton {
-  type: ButtonType;
+  type: IconTypeEnum;
   onClick: () => void;
 }
 

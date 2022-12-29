@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ButtonBase } from '../atom/ButtonBase';
-import { RiLogoutCircleRLine } from 'react-icons/ri'
+import { ButtonBase } from '../bases/ButtonBase';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { useApi } from '../../hooks/useApi';
-import { FaUserCircle } from 'react-icons/fa';
+import { CoolIconButton } from '../atom/CoolIconButon';
+import { IconTypeEnum, SizeEnum } from '../../types/types';
+import { CoolIcon } from '../atom/CoolIcon';
 
 
 const MainBox = styled.div`
@@ -22,14 +22,14 @@ const UserInfo = styled.div`
     width: 80%;
     gap: 5%;
     font-size: 1.3rem;
-    color: ${props => props.theme.color.lightFont}  
+    color: ${props => props.theme.color.lightFont};
 `;
 
 const UserIcon = styled.div`
     color: ${props => props.theme.color.lightFont};
     border-radius: 60px;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border: none;
     font-size: 2rem;
     display: flex;
@@ -61,7 +61,7 @@ const LogoutButton = styled(ButtonBase)`
         color: ${props => props.theme.color.highlightColor};
         border-color: ${props => props.theme.color.highlightColor};
     }`;
-
+    
 export function HeaderUser() {
 
     const navigate = useNavigate()
@@ -79,12 +79,11 @@ export function HeaderUser() {
         <MainBox>
             <UserInfo>
                 <UserIcon>
-                    <FaUserCircle/>
+                    <CoolIcon type={IconTypeEnum.USER} />
                 </UserIcon>
                 {authInfo.id}
             </UserInfo>
-
-            <LogoutButton clickFun={onLogout}><RiLogoutCircleRLine /></LogoutButton>
+            <CoolIconButton type={IconTypeEnum.LOGOUT} clickFun={onLogout} size={SizeEnum.XS} />
         </MainBox>
     )
 }

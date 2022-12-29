@@ -16,7 +16,7 @@ const Title = styled.h1`
 
 
 
-export function ScreenFrame({ title, children }: { title?: string, children: JSX.Element }) {
+export function ScreenFrame({ title, children }: { title?: string, children: JSX.Element| JSX.Element[] }) {
 
     return (
         <MainBox>

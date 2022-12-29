@@ -5,7 +5,7 @@ import { useClickOutside } from '../../hooks/useClickOutside';
 import { clearContextAtom } from '../../recoil/mainAtoms';
 
 import { device } from '../../StyledTheme';
-import { ContextOption, ContextOptionEnum } from '../../types/types';
+import { ContextOption } from '../../types/types';
 import { CoolContextOption } from '../atom/CoolContextOption';
 
 

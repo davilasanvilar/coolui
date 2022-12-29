@@ -1,13 +1,8 @@
 import React, { ReactNode } from 'react';
-import styled, { DefaultTheme } from 'styled-components';
-import { ModalType, SizeEnum } from '../../types/types';
-import { ModalButton } from '../../types/types'
-import { CoolButton } from '../atom/CoolButton';
-import { CgCloseR } from 'react-icons/cg';
-import { ModalBase } from './ModalBase';
+import { ModalType } from '../../types/types';
 import { useRecoilState } from 'recoil';
-import { modalAtom } from '../../recoil/mainAtoms';
 import { OtherModal } from './OtherModal';
+import { useModal } from '../../hooks/useModal';
 
 
 const getModalComponent = (modalType?: ModalType): JSX.Element => {
@@ -22,11 +17,11 @@ const getModalComponent = (modalType?: ModalType): JSX.Element => {
 
 export function CoolModal() {
 
-    const [modalInfo, setModalInfo] = useRecoilState(modalAtom)
+    const {modalProps, setModalProps} = useModal()
 
     return (
-        modalInfo.visible ?
-            getModalComponent(modalInfo.type)
+        modalProps.visible ?
+            getModalComponent(modalProps.type)
             : <></>
     )
 }

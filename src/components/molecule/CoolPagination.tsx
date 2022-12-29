@@ -1,8 +1,8 @@
-import React, { } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
-import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import { device } from '../../StyledTheme';
+import { CoolIconButton } from '../atom/CoolIconButon';
+import { IconTypeEnum, SizeEnum } from '../../types/types';
 
 interface PaginationButProps {
     active?: boolean
@@ -17,24 +17,12 @@ const MainBox = styled.div`
     width: 100%;
     box-sizing: border-box;
     justify-content: space-evenly;
+    align-items: center;
     margin-top: 5vh;
 `;
 
-const PaginationBut = styled.button<PaginationButProps>`
-    border: none;
-    background: transparent;
-    &:hover svg {
-        color: ${props => props.active ? props.theme.color.highlightColor : props.theme.color.inactive};
-    }
-    & svg {
-        color: ${props => props.active ? props.theme.color.mainColor : props.theme.color.inactive};
-        font-size: ${props => props.theme.fontSize.h2};
-    }
-`;
-
-
 const NumberBox = styled.div`
-    font-size: ${props => props.theme.fontSize.highText};
+    font-size: ${props => props.theme.fontSize.h2};
     color: ${props => props.theme.color.mainColor};
 `;
 
@@ -44,9 +32,12 @@ export function CoolPagination({ page, setPage, totalPages, isLoading }:
 
     return (
         <MainBox>
-            <PaginationBut active={!isLoading && page > 0} onClick={page > 0 ? () => setPage((old) => old - 1) : undefined}><MdNavigateBefore /></PaginationBut>
+            <CoolIconButton type={IconTypeEnum.PREVIOUS} size={SizeEnum.XS} isDark isActive={!isLoading && page > 0} clickFun={page > 0 ? (e) => {
+                e.currentTarget.disabled = true;
+                ; setPage((old) => old - 1);
+            } : undefined} />
             <NumberBox>{page + 1}</NumberBox>
-            <PaginationBut active={!isLoading && page < (totalPages - 1)} onClick={page < (totalPages - 1) ? () => setPage((old) => old + 1) : undefined}><MdNavigateNext /></PaginationBut>
+            <CoolIconButton type={IconTypeEnum.NEXT} size={SizeEnum.XS} isDark isActive={!isLoading && page < (totalPages - 1)} clickFun={page < (totalPages - 1) ? () => setPage((old) => old + 1) : undefined} />
         </MainBox>
     )
 }

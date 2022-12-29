@@ -1,12 +1,10 @@
 import React, { useRef } from 'react';
-import { AiOutlineDelete, AiTwotoneEdit } from 'react-icons/ai';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { useClickOutside } from '../../hooks/useClickOutside';
 import { clearContextAtom } from '../../recoil/mainAtoms';
-
 import { device } from '../../StyledTheme';
-import { ContextOption, ContextOptionEnum } from '../../types/types';
+import {IconTypeEnum } from '../../types/types';
+import { CoolIcon } from './CoolIcon';
 
 
 const MainBox = styled.div`
@@ -55,37 +53,31 @@ const LabelBox = styled.span`
     }
 `;
 
-
-
 interface IconLabel {
     icon: JSX.Element
     label: string
 }
 
-const getIconLabel = (type: ContextOptionEnum) => {
+const getLabel = (type: IconTypeEnum) => {
     switch (type) {
-        case ContextOptionEnum.EDIT:
-            return { icon: <AiTwotoneEdit />, label: 'Editar' }
-        case ContextOptionEnum.DELETE:
-            return { icon: <AiOutlineDelete />, label: 'Borrar' }
+        case IconTypeEnum.EDIT:
+            return 'Editar'
+        case IconTypeEnum.DELETE:
+            return 'Borrar'
         default:
-            return { icon: <></>, label: '' }
+            ''
 
     }
 }
 
-
-
-export function CoolContextOption({ type, onClick }: { type: ContextOptionEnum, onClick: () => void }) {
+export function CoolContextOption({ type, onClick }: { type: IconTypeEnum, onClick: () => void }) {
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const setClearContext = useSetRecoilState<boolean>(clearContextAtom)
 
-    const iconLabel = getIconLabel(type)
-
     return (
         <MainBox onClick={() => { setClearContext((old) => !old); onClick(); }}>
-            <IconBox>{iconLabel.icon}</IconBox>
-            <LabelBox>{iconLabel.label}</LabelBox>
+            <IconBox><CoolIcon type={type} /></IconBox>
+            <LabelBox>{getLabel(type)}</LabelBox>
         </MainBox>
     )
 }

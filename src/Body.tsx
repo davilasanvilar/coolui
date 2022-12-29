@@ -9,6 +9,7 @@ import { LoginScreen } from './screens/LoginScreen';
 import { CoolModal } from './components/organism/CoolModal';
 import { ConfirmationModal } from './components/organism/ConfirmationModal';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { CoolSnackbar } from './components/atom/CoolSnackbar';
 
 
 const MainBox = styled.div`
@@ -35,6 +36,7 @@ function Body() {
             <Loading />
             <CoolModal/>
             <ConfirmationModal/>
+            <CoolSnackbar/>
           </>
           :
           <LoadingScreen />

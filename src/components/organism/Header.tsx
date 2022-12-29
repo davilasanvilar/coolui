@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { useApi } from '../../hooks/useApi';
 import { HeaderUser } from '../molecule/HeaderUser';
 import { useRecoilState } from 'recoil';
-import { confirmationModal, modalAtom } from '../../recoil/mainAtoms';
 import { ModalType } from '../../types/types';
 
 
@@ -27,7 +26,6 @@ const MainBox = styled.div`
 
 export function Header() {
     const navigate = useNavigate()
-    const [modalInfo, setModalInfo] = useRecoilState(modalAtom)
 
     return (
         <MainBox>

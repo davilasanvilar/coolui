@@ -1,19 +1,26 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { CoolButton } from '../components/atom/CoolButton';
+import { CoolCheckbox } from '../components/atom/CoolCheckbox';
+import { CoolFormElement } from '../components/atom/CoolFormElement';
+import { CoolSelect } from '../components/atom/CoolSelect';
+import { CoolTextInput } from '../components/atom/CoolTextInput';
 import { ScreenFrame } from '../components/molecule/ScreenFrame';
 import { CoolTable } from '../components/organism/CoolTable';
 import { useApi } from '../hooks/useApi';
-import { useAuth } from '../hooks/useAuth';
-import { confirmationModal, ConfirmationModalProps } from '../recoil/mainAtoms';
+import { useModal } from '../hooks/useModal';
+import { snackAtom } from '../recoil/mainAtoms';
 import { Test } from '../types/entities';
-import { ContextOption, ContextOptionEnum, Page } from '../types/types';
+import { ColorEnum, ContextOption, IconTypeEnum, Page, SelectOption } from '../types/types';
 
 
 const MainBox = styled.div`
     display: flex;
+    gap: 5vh;
+    margin-left: 10%;
     justify-content: center;
+    flex-direction: column;
 `;
 
 
@@ -28,9 +35,14 @@ export function Inicio() {
     const [page, setPage] = useState<number>(0)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [data, setData] = useState<Page<Test> | undefined>(undefined)
+    const [checkbox, setCheckbox] = useState<boolean>(false)
 
-    const setConfirmationModalInfo = useSetRecoilState<ConfirmationModalProps>(confirmationModal)
+    const { setConfirmationModalProps } = useModal()
 
+
+    const [selectVal, setSelectVal] = useState<string>('')
+
+    const [opensnack, setopensnack] = useRecoilState(snackAtom)
 
     useEffect(() => {
         onGetData()
@@ -44,25 +56,43 @@ export function Inicio() {
     }
 
     const contextOptions: ContextOption[] = [{
-        type: ContextOptionEnum.EDIT,
+        type: IconTypeEnum.EDIT,
         onClick: (ids: string[]) => {
             if (ids.length === 1) {
                 console.log(`Editando el ${ids[0]}`)
             }
         }
     }, {
-        type: ContextOptionEnum.DELETE,
+        type: IconTypeEnum.DELETE,
         onClick: (ids: string[]) => {
             ids.forEach((id) =>
-                setConfirmationModalInfo({ visible: true, params: { body: '¿Desea borrar el elemento?', onConfirm: () => console.log(`Borrando el ${id}`) }, title: 'Borrado' })
+                setConfirmationModalProps({ visible: true, params: { body: '¿Desea borrar el elemento?', onConfirm: () => console.log(`Borrando el ${id}`) }, title: 'Borrado' })
             )
         }
     }]
 
+    const optionsArray: SelectOption[] = [
+        { label: "Iniciativas", value: "iniciativas" },
+        { label: "Quejas", value: "quejas" },
+        { label: "Sugerencias", value: "sugerencias" }
+    ]
+
     return (
         <ScreenFrame title='Pantalla de inicio'>
             <MainBox>
+                <CoolButton clickFun={() => setopensnack(({ visible: true, text: 'Elemento borrado correctamente', icon: IconTypeEnum.DELETE, color: ColorEnum.DANGER }))} />
                 <CoolTable width={50} height={50} headers={headers} data={data} setPage={setPage} contextOptions={contextOptions} isLoading={isLoading}></CoolTable>
+                <p style={{ position: 'absolute', top: 500 }}>{selectVal}</p>
+                {/* <CoolFormElement label='Tipo de petición'>
+                    <CoolSelect id='select' setValue={setSelectVal} value={selectVal} options={optionsArray} />
+                </CoolFormElement>
+                <CoolFormElement label='Nombre'>
+                    <CoolTextInput id='textinput' value={selectVal} setValue={setSelectVal} />
+                </CoolFormElement>
+                <CoolFormElement label='Tipo de petición'>
+                    <CoolCheckbox value={checkbox} setValue={setCheckbox} label={'Aceptar términos y condiciones'} isDark />
+    </CoolFormElement>*/}
+
             </MainBox>
         </ScreenFrame >
     )

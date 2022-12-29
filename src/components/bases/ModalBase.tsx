@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react';
 import styled, { DefaultTheme, keyframes } from 'styled-components';
-import { SizeEnum } from '../../types/types';
+import { IconTypeEnum, SizeEnum } from '../../types/types';
 import { ModalButton } from '../../types/types'
 import { CoolButton } from '../atom/CoolButton';
-import { CgCloseR } from 'react-icons/cg';
 import { device } from '../../StyledTheme';
+import { CoolIcon } from '../atom/CoolIcon';
+import { CoolIconButton } from '../atom/CoolIconButon';
 
 
 const MainBox = styled.div`
@@ -82,7 +83,7 @@ const ModalHeader = styled.div<ModalProps>`
     & h2 {
         color: ${props => props.theme.color.lightFont};
         @media ${device.laptop} { 
-            font-size: ${props => props.theme.fontSize.h2}
+            font-size: ${props => props.theme.fontSize.highText}
         }
         @media ${device.desktopL} { 
             font-size: 2rem
@@ -91,7 +92,7 @@ const ModalHeader = styled.div<ModalProps>`
     }
     & button {
         color: ${props => props.theme.color.lightFont};
-        font-size: 2rem;
+        font-size: 1.4rem;
         background: none;
         border: none;
         padding: 0;
@@ -137,7 +138,7 @@ export function ModalBase({ children, title, size, onClose, buttons }: { childre
             <InsideBox size={size} >
                 <ModalHeader size={size} >
                     <h2>{title}</h2>
-                    <button id='modalCloseBut' onClick={() => { onClose() }}><CgCloseR /></button>
+                    <CoolIconButton clickFun={() => { onClose() }} type={IconTypeEnum.CLOSE} size={SizeEnum.XS} />
                 </ModalHeader>
                 {children ?
                     <ModalBody size={size}>

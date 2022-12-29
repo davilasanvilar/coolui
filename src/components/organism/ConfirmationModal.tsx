@@ -1,14 +1,13 @@
-import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { isLoading, confirmationModal, ConfirmationModalProps, ModalAtomProps, modalAtom } from '../../recoil/mainAtoms';
-import { ModalBase } from './ModalBase';
-import { AiOutlineSend, AiOutlineClose } from 'react-icons/ai'
-import { ButtonType, ModalButton, SizeEnum } from '../../types/types';
+import { isLoading } from '../../recoil/mainAtoms';
+import { ModalBase } from './../bases/ModalBase';
+import { IconTypeEnum, ModalButton, SizeEnum } from '../../types/types';
 import styled from 'styled-components';
+import { useModal } from '../../hooks/useModal';
 
 
 const StyledText = styled.p`
-    font-size: 1.4rem;
+    font-size: ${props => props.theme.fontSize.highText};
     color: ${props => props.theme.color.darkFont};
     text-align: center;
     display: flex;
@@ -21,13 +20,13 @@ const StyledText = styled.p`
 
 export function ConfirmationModal() {
 
-    const [confirmationModalInfo, setConfirmationModalInfo] = useRecoilState(confirmationModal)
+    const {confirmationModalProps, setConfirmationModalProps} = useModal()
 
     const [isLoadingState, setIsLoadingState] = useRecoilState<boolean>(isLoading)
 
     const onConfirm = async () => {
         setIsLoadingState(() => true)
-        const onConfirm = confirmationModalInfo.params?.onConfirm
+        const onConfirm = confirmationModalProps.params?.onConfirm
         try {
             if (onConfirm) {
                 await onConfirm()
@@ -41,22 +40,22 @@ export function ConfirmationModal() {
     }
 
     const onClear = () => {
-        setConfirmationModalInfo(() => { return { visible: false } })
+        setConfirmationModalProps(() => { return { visible: false } })
     }
 
     const buttons: ModalButton[] = [
-        { type: ButtonType.CANCEL, onClick: onClear },
-        { type: ButtonType.CONFIRM, onClick: onConfirm },
+        { type: IconTypeEnum.CANCEL, onClick: onClear },
+        { type: IconTypeEnum.CONFIRM, onClick: onConfirm },
 
     ]
 
 
     return (
-        confirmationModalInfo.visible ?
-            <ModalBase title={confirmationModalInfo.title} size={SizeEnum.S} buttons={buttons} onClose={() => { onClear() }}>
-                {confirmationModalInfo.params?.body ?
+        confirmationModalProps.visible ?
+            <ModalBase title={confirmationModalProps.title} size={SizeEnum.S} buttons={buttons} onClose={() => { onClear() }}>
+                {confirmationModalProps.params?.body ?
                     <StyledText>
-                        {confirmationModalInfo.params.body}
+                        {confirmationModalProps.params.body}
                     </StyledText>
                     : <></>
                 }

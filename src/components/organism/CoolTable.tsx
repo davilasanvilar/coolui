@@ -1,13 +1,8 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import styled, { DefaultTheme, keyframes, useTheme } from 'styled-components';
-import { ContextOption, ModalType, Page, SizeEnum } from '../../types/types';
-import { ModalButton } from '../../types/types'
-import { CoolButton } from '../atom/CoolButton';
-import { CgCloseR } from 'react-icons/cg';
-import { ModalBase } from './ModalBase';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { clearContextAtom, modalAtom } from '../../recoil/mainAtoms';
-import { OtherModal } from './OtherModal';
+import React, { useEffect, useState } from 'react';
+import styled, { keyframes, useTheme } from 'styled-components';
+import { ContextOption, Page, SizeEnum } from '../../types/types';
+import { useRecoilValue } from 'recoil';
+import { clearContextAtom } from '../../recoil/mainAtoms';
 import { CoolPagination } from '../molecule/CoolPagination';
 import { device } from '../../StyledTheme';
 import { ContextMenuPosition, CoolContextMenu } from '../molecule/CoolContextMenu';
@@ -179,7 +174,7 @@ export function CoolTable({ width, height, headers, data, setPage, contextOption
                     <thead>
                         <tr>
                             {headers.map((header) =>
-                                <th>
+                                <th key={`key_${header}`}>
                                     {header}
                                 </th>
                             )}
@@ -187,9 +182,9 @@ export function CoolTable({ width, height, headers, data, setPage, contextOption
                     </thead>
                     <StyledTableBody isLoading={isLoading}>
                         {data ? data.content.map((element) =>
-                            <RowSelectedStyle selected={selectedElements.includes(element.id)} onContextMenu={(e) => { onOpenContextMenu(e, element.id) }}>
+                            <RowSelectedStyle key={`element_${element.id}`} selected={selectedElements.includes(element.id)} onContextMenu={(e) => { onOpenContextMenu(e, element.id) }}>
                                 {headers.map((header) =>
-                                    <td>{element[header]}</td>
+                                    <td key={`element_${element.id}_${header}`}>{element[header]}</td>
                                 )}
                             </RowSelectedStyle>)
                             : <></>}
@@ -202,9 +197,6 @@ export function CoolTable({ width, height, headers, data, setPage, contextOption
                                 </LoadingIconBox>
                             </LoadingIconBlur>
                             : undefined}
-
-
-
                     </StyledTableBody>
                 </StyledTable>
             </TableBox>

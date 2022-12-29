@@ -1,23 +1,24 @@
 import React, { MouseEventHandler } from 'react';
 import styled from 'styled-components';
-import { ButtonType } from '../../types/types';
+import { ButtonTypeEnum } from '../../types/types';
 
 const ButtonStyled = styled.button`
+overflow: hidden;
 `;
 
 export function ButtonBase({ clickFun, className, children, type }: {
-    clickFun: MouseEventHandler<HTMLButtonElement>, className?: string, children?: JSX.Element | JSX.Element[], type?: ButtonType
+    clickFun?: MouseEventHandler<HTMLButtonElement>, className?: string, children?: JSX.Element | JSX.Element[], type?: ButtonTypeEnum
 }) {
 
     const getIcon = () => {
         switch (type) {
-            case ButtonType.SAVE:
+            case ButtonTypeEnum.SAVE:
                 return <></>
-            case ButtonType.CANCEL:
+            case ButtonTypeEnum.CANCEL:
                 return <></>
-            case ButtonType.DELETE:
+            case ButtonTypeEnum.DELETE:
                 return <></>
-            case ButtonType.EDIT:
+            case ButtonTypeEnum.EDIT:
                 return <></>
             default:
                 return <></>
@@ -25,6 +26,6 @@ export function ButtonBase({ clickFun, className, children, type }: {
     }
 
     return (
-        <button className={className} onClick={clickFun}>{children}</button>
+        <ButtonStyled className={className} onClick={clickFun}>{children}</ButtonStyled>
     )
 }

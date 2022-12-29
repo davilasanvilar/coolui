@@ -31,16 +31,21 @@ export const StyledTheme = ({ children }: { children: ReactNode }) => {
   const highlightColor = '#E1A600'
   const mainColorLowOp = '#0071bc5c'
   const modalBackground = '#3fb1fc21'
+  const danger = 'red'
   const lightFont = '#fefefe'
   const darkFont = '#040126'
-  const lightBackground = '#deedff'
+  const lightBackground = '#deedffcc'
   const button = '#0F9EFB'
   const buttonHover = '#005790'
+  const hoverInputLight = '#ccdef5'
+  const hoverInputDark = '#005790'
+  const inputDark  = '#ccdef5'
+  const inputLight = '#ccdef5'
   const inactive = '#bbe2ff'
   
 
   const color = { bgColor, mainColor, secondColor, highlightColor, modalBackground,
-    mainColorLowOp, lightFont, darkFont, lightBackground, button, buttonHover, inactive
+    mainColorLowOp, lightFont, darkFont, lightBackground, button, buttonHover, inactive, hoverInputDark, hoverInputLight, inputDark, inputLight, danger
    }
 
   const regularText = '1.1rem'

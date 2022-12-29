@@ -2,7 +2,7 @@
 import "styled-components";
 
 // and extend them!
-interface ThemeColors {
+export interface ThemeColors {
   bgColor: string;
   mainColor: string;
   secondColor: string;
@@ -15,6 +15,11 @@ interface ThemeColors {
   button: string;
   buttonHover: string;
   inactive:string;
+  inputDark: string;
+  danger: string;
+  inputLight:string;
+  hoverInputLight: string;
+  hoverInputDark: string;
 }
 
 interface ThemeFontSizes {

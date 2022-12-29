@@ -1,37 +1,21 @@
 import { atom } from "recoil";
-import { ModalType } from "../types/types";
+import { ColorEnum, IconTypeEnum, ModalType } from "../types/types";
 
 export const isLoading = atom<boolean>({
   key: "isLoading",
   default: false,
 });
 
-export interface ConfirmationModalProps {
+export interface SnackAtomProps {
   visible: boolean
-  title?: string
-  params?: ModalParams
+  text?: string
+  icon?: IconTypeEnum
+  color?: ColorEnum
 }
 
-export const confirmationModal = atom<ConfirmationModalProps>({
-  key: "confirmationModal",
-  default: { visible: false, params: {body:'¿Quiere confirmar esto?'}},
-});
-
-export interface ModalAtomProps {
-  visible: boolean
-  title?: string
-  type?: ModalType
-  params?: ModalParams
-}
-export interface ModalParams {
-  body?: string
-  elementId?: string
-  onConfirm?: ()=>void
-}
-
-export const modalAtom = atom<ModalAtomProps>({
-  key: "modalAtom",
-  default: { visible: false, title:'', type: undefined},
+export const snackAtom = atom<SnackAtomProps>({
+  key: "snackAtom",
+  default: { visible: false, text: 'Elemento borrado correctamente', icon: IconTypeEnum.DELETE, color: ColorEnum.DANGER},
 });
 
 export const clearContextAtom = atom<boolean>({

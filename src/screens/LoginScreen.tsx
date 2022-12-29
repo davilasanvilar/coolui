@@ -1,14 +1,17 @@
 import React, { FC, ReactNode, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ClipLoader, DotLoader } from 'react-spinners';
+import { ClipLoader } from 'react-spinners';
 import styled, { useTheme } from 'styled-components';
-import { ButtonBase } from '../components/atom/ButtonBase';
-import { TextField } from '../components/atom/TextField';
+import { ButtonBase } from '../components/bases/ButtonBase';
 import { useApi } from '../hooks/useApi';
 import { useAuth } from '../hooks/useAuth';
-import { StyledTheme } from '../StyledTheme';
 import loginImg from './../../public/loginImg.png';
 import { FaSignInAlt } from 'react-icons/fa'
+import { TextInputBase, TextInputTypeEnum } from '../components/bases/TextInputBase';
+import { CoolTextInput } from '../components/atom/CoolTextInput';
+import { CoolFormElement } from '../components/atom/CoolFormElement';
+import { CoolButton } from '../components/atom/CoolButton';
+import { IconTypeEnum } from '../types/types';
 
 const MainBox = styled.div`
     display: flex;
@@ -31,12 +34,14 @@ const MainBox = styled.div`
 
 const LoginBox = styled.div`
     display: flex;
-    gap: 1vh;
+    gap: 2vh;
     box-sizing: border-box;
     padding: 1% 2%;
+    background-color: ${props => props.theme.color.bgColor};
     width: 30%;
-    height: 70vh;
-    max-height: 600px;
+    padding: 10vh 0;
+    height: 100vh;
+    justify-content:center;
     flex-direction: column;
     align-items: center;
     & img {
@@ -46,35 +51,8 @@ const LoginBox = styled.div`
     }
 `;
 
-const LoginStyledInput = styled(TextField)`
-    min-width: 200px;
-    width:80%;
-    font-size: ${props => props.theme.fontSize.regularText};
-    padding: 10px; 
-    margin-bottom: 5%; 
-`;
-
-const LoginButton = styled(ButtonBase)`
-    font-size: ${props => props.theme.fontSize.buttonLabel};
-    padding: 15px;
-    width: 50%;
-    background: ${props => props.theme.color.button};
-    max-width: 200px;
-    margin-top: 2%;
-    color: ${props => props.theme.color.lightFont};
-    border: none;
-    transition: background .2s;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    & span {
-        color: ${props => props.theme.color.lightFont};
-    }
-    &:hover {
-        transition: background .2s;
-        background: ${props => props.theme.color.buttonHover};
-    }
-    
+const LoginButton = styled(CoolButton)`
+    margin-top: 3vh;
 `;
 
 
@@ -133,9 +111,14 @@ export function LoginScreen() {
             <MainBox className={isHidden ? 'hidden' : ''}>
                 <LoginBox>
                     <img src={loginImg} alt='Logo login' />
-                    <LoginStyledInput id='mail' value={mail} setValue={setMail} placeholder='Email'></LoginStyledInput>
-                    <LoginStyledInput id='password' value={password} setValue={setPassword} placeholder='Contraseña' type='password'></LoginStyledInput>
-                    <LoginButton clickFun={onLogin}><>{isLoading ? <ClipLoader color={theme.color.lightFont} size={20} /> : <FaSignInAlt color={theme.color.lightFont} size={20} />}{'Entrar'}</></LoginButton>
+                    <CoolFormElement label='Email'>
+                        <CoolTextInput id={'mail'} value={mail} setValue={setMail} />
+
+                    </CoolFormElement>
+                    <CoolFormElement label='Contraseña'>
+                        <CoolTextInput id={'password'} value={password} setValue={setPassword} type={TextInputTypeEnum.PASSWORD} />
+                    </CoolFormElement>
+                    <LoginButton clickFun={() => onLogin()} type={IconTypeEnum.LOGIN} ></LoginButton>
                 </LoginBox>
             </MainBox>
             : <></>

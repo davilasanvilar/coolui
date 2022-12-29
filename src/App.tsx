@@ -4,6 +4,7 @@ import { Loading } from './components/atom/Loading';
 import GlobalStyle from './globalStyles';
 import { ApiProvider } from './hooks/useApi';
 import { AuthProvider } from './hooks/useAuth';
+import { ModalProvider } from './hooks/useModal';
 import { StyledTheme } from './StyledTheme';
 
 
@@ -12,11 +13,13 @@ function App() {
     <RecoilRoot>
       <ApiProvider>
         <AuthProvider>
-          <StyledTheme>
-            <GlobalStyle />
-            <Loading />
-            <Body />
-          </StyledTheme>
+          <ModalProvider>
+            <StyledTheme>
+              <GlobalStyle />
+              <Loading />
+              <Body />
+            </StyledTheme>
+          </ModalProvider>
         </AuthProvider>
       </ApiProvider>
     </RecoilRoot>
