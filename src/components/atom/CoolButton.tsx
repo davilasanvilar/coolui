@@ -13,7 +13,6 @@ export enum ButtonStyleEnum {
 interface SizeProps {
     width: number //UNIT: px
     height: number //UNIT: px
-    fontSize: string
 }
 
 interface AllProps extends SizeProps {
@@ -24,7 +23,7 @@ interface AllProps extends SizeProps {
 
 const CoolStyledButton = styled(ButtonBase) <AllProps>`
     padding: .5rem;
-    font-size: ${props => props.fontSize};
+    font-size: 1rem;
     border-radius: 12px;
     width: ${props => `${props.width}px`};
     height: ${props => `${props.height}px`};
@@ -80,22 +79,22 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
 
     &:active {
         outline:none;
-        border: 2px solid ${props => props.disabled ? (props.style === ButtonStyleEnum.OUTLINED ? undefined : 'transparent')  : props.theme.color.highlight.n} !important;
+        border: 2px solid ${props => props.disabled ? (props.style === ButtonStyleEnum.OUTLINED ? undefined : 'transparent') : props.theme.color.highlight.n} !important;
     }
 `;
 
 const getSize = (size?: SizeEnum): SizeProps => {
     switch (size) {
         case SizeEnum.L:
-            return { width: 250, height: 50, fontSize: '1rem' }
+            return { width: 250, height: 50 }
         case SizeEnum.M:
-            return { width: 200, height: 50, fontSize: '1rem' }
+            return { width: 200, height: 50 }
         case SizeEnum.S:
-            return { width: 150, height: 50, fontSize: '1rem' }
+            return { width: 150, height: 50 }
         case SizeEnum.XS:
-            return { width: 100, height: 50, fontSize: '1rem' }
+            return { width: 100, height: 50 }
         default:
-            return { width: 200, height: 50, fontSize: '1rem' }
+            return { width: 200, height: 50 }
     }
 }
 
@@ -110,7 +109,7 @@ export function CoolButton({ onClick, children, className, iconType, size, style
 
     return (
         <CoolStyledButton disabled={disabled} className={className} height={sizeInfo.height} width={sizeInfo.width}
-            fontSize={sizeInfo.fontSize} onClick={onClick} style={style} color={color}>
+            onClick={onClick} style={style} color={color}>
             {iconType !== undefined ? <CoolIcon type={iconType} /> : <></>}
             {children ? <div>{children}</div> : <></>}
         </CoolStyledButton>
