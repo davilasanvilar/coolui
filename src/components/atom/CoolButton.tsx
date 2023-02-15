@@ -18,7 +18,7 @@ interface SizeProps {
 
 interface AllProps extends SizeProps {
     style?: ButtonStyleEnum
-    isActive?: boolean;
+    disabled?: boolean;
     color?: keyof ThemeColors;
 }
 
@@ -30,12 +30,13 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     height: ${props => `${props.height}px`};
     min-width: ${props => `${props.width}px`};
     min-height: ${props => `${props.height}px`};
-    background-color: ${props => props.isActive ? (
-        props.style === ButtonStyleEnum.FILLED ?
-            props.theme.color[props.color ? props.color : 'main'].l3 :
-            'transparent')
+    background-color: ${props => props.disabled ?
+        props.theme.color[props.color ? props.color : 'main'].l5
         :
-        props.theme.color[props.color ? props.color : 'main'].l5};
+        (
+            props.style === ButtonStyleEnum.FILLED ?
+                props.theme.color[props.color ? props.color : 'main'].l3 :
+                'transparent')};
     outline:none;
     color: ${props => props.style === ButtonStyleEnum.FILLED ? props.theme.color.main.l7 : props.theme.color[props.color ? props.color : 'main'].l3};
     border: ${props => props.style === ButtonStyleEnum.OUTLINED ? `2px solid ${props.theme.color[props.color ? props.color : 'main'].l3}}` : '2px solid transparent'};
@@ -65,20 +66,21 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     
     &:hover {
         transition: background .2s;
-        border-color: ${props => props.isActive ? (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined) : undefined} !important ;
-        color: ${props => props.isActive ? (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined) : undefined} !important;
-        background: ${props => props.isActive ? (
-        props.style === ButtonStyleEnum.FILLED ?
-            props.theme.color[props.color ? props.color : 'main'].d1
-            :
-            props.theme.color.main.lowOp)
+        border-color: ${props => props.disabled ? undefined : (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined)} !important ;
+        color: ${props => props.disabled ? undefined : (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined)} !important;
+        background: ${props => props.disabled ?
+        undefined
         :
-        undefined};
+        (
+            props.style === ButtonStyleEnum.FILLED ?
+                props.theme.color[props.color ? props.color : 'main'].d1
+                :
+                props.theme.color.main.lowOp)};
     }
 
     &:active {
         outline:none;
-        border: 2px solid ${props => props.isActive ? props.theme.color.highlight.n : 'transparent'} !important;
+        border: 2px solid ${props => props.disabled ? (props.style === ButtonStyleEnum.OUTLINED ? undefined : 'transparent')  : props.theme.color.highlight.n} !important;
     }
 `;
 
@@ -99,15 +101,15 @@ const getSize = (size?: SizeEnum): SizeProps => {
 
 
 
-export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, isActive = true, color }: {
+export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, disabled = false, color }: {
     onClick?: MouseEventHandler<HTMLButtonElement>, children?: string | JSX.Element | JSX.Element[], className?: string, iconType?: IconTypeEnum,
-    size?: SizeEnum, style?: ButtonStyleEnum, isActive?: boolean, color?: keyof ThemeColors
+    size?: SizeEnum, style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors
 }) {
 
     const sizeInfo = getSize(size)
 
     return (
-        <CoolStyledButton isActive={isActive} className={className} height={sizeInfo.height} width={sizeInfo.width}
+        <CoolStyledButton disabled={disabled} className={className} height={sizeInfo.height} width={sizeInfo.width}
             fontSize={sizeInfo.fontSize} onClick={onClick} style={style} color={color}>
             {iconType !== undefined ? <CoolIcon type={iconType} /> : <></>}
             {children ? <div>{children}</div> : <></>}
