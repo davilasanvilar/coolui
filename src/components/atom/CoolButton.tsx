@@ -99,8 +99,8 @@ const getSize = (size?: SizeEnum): SizeProps => {
 
 
 
-export function CoolButton({ clickFun, children, className, iconType, size, style = ButtonStyleEnum.FILLED, isActive = true, color }: {
-    clickFun?: MouseEventHandler<HTMLButtonElement>, children?: string | JSX.Element | JSX.Element[], className?: string, iconType?: IconTypeEnum,
+export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, isActive = true, color }: {
+    onClick?: MouseEventHandler<HTMLButtonElement>, children?: string | JSX.Element | JSX.Element[], className?: string, iconType?: IconTypeEnum,
     size?: SizeEnum, style?: ButtonStyleEnum, isActive?: boolean, color?: keyof ThemeColors
 }) {
 
@@ -108,7 +108,7 @@ export function CoolButton({ clickFun, children, className, iconType, size, styl
 
     return (
         <CoolStyledButton isActive={isActive} className={className} height={sizeInfo.height} width={sizeInfo.width}
-            fontSize={sizeInfo.fontSize} clickFun={clickFun} style={style} color={color}>
+            fontSize={sizeInfo.fontSize} onClick={onClick} style={style} color={color}>
             {iconType !== undefined ? <CoolIcon type={iconType} /> : <></>}
             {children ? <div>{children}</div> : <></>}
         </CoolStyledButton>
