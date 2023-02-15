@@ -13,7 +13,6 @@ export enum ButtonStyleEnum {
 interface SizeProps {
     width: number //UNIT: px
     fullWidth?: boolean;
-    height: number //UNIT: px
 }
 
 interface AllProps extends SizeProps {
@@ -23,13 +22,12 @@ interface AllProps extends SizeProps {
 }
 
 const CoolStyledButton = styled(ButtonBase) <AllProps>`
-    padding: 12px 16px;
+    padding: 15px 20px;
     font-size: 1rem;
-    height: 12px;
-    border-radius: 12px;
+    height: 49px;
+    box-sizing: border-box;
+    border-radius: 14px;
     width: ${props => props.fullWidth ? '100%' : `${props.width}px`};
-    min-width: ${props => `${props.width}px`};
-    min-height: ${props => `${props.height}px`};
     background-color: ${props => props.disabled ?
         props.theme.color[props.color ? props.color : 'main'].l5
         :
@@ -48,12 +46,10 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     overflow: hidden;
     @media ${device.desktopL} { 
         width: ${props => `${1.2 * props.width}px`};
-        height: ${props => `${1.2 * props.height}px`};
     }
 
     & svg {
         font-size: 1.2rem;
-        box-sizing: border-box;
     }
     & div {
         overflow: hidden;
@@ -85,15 +81,15 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
 const getSize = (size?: SizeEnum): SizeProps => {
     switch (size) {
         case SizeEnum.L:
-            return { width: 250, height: 50 }
+            return { width: 250 }
         case SizeEnum.M:
-            return { width: 200, height: 50 }
+            return { width: 200 }
         case SizeEnum.S:
-            return { width: 150, height: 50 }
+            return { width: 150 }
         case SizeEnum.XS:
-            return { width: 100, height: 50 }
+            return { width: 100 }
         default:
-            return { width: 200, height: 50 }
+            return { width: 200 }
     }
 }
 
@@ -101,13 +97,13 @@ const getSize = (size?: SizeEnum): SizeProps => {
 
 export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, disabled = false, color, fullWidth }: {
     onClick?: MouseEventHandler<HTMLButtonElement>, children?: string | JSX.Element | JSX.Element[], className?: string, iconType?: IconTypeEnum,
-    size?: SizeEnum, style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors, fullWidth?:boolean
+    size?: SizeEnum, style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors, fullWidth?: boolean
 }) {
 
     const sizeInfo = getSize(size)
 
     return (
-        <CoolStyledButton disabled={disabled} className={className} height={sizeInfo.height} width={sizeInfo.width}
+        <CoolStyledButton disabled={disabled} className={className} width={sizeInfo.width}
             onClick={onClick} style={style} color={color} fullWidth={fullWidth}>
             {iconType !== undefined ? <CoolIcon type={iconType} /> : <></>}
             {children ? <div>{children}</div> : <></>}
