@@ -1,7 +1,5 @@
-import React, { MouseEventHandler } from 'react';
 import styled from 'styled-components';
-import { SelectOption, SizeEnum } from '../../types/types';
-import { SelectBase } from '../bases/SelectBase';
+import { SizeEnum } from '../../types/types';
 import { device } from '../../StyledTheme';
 import { TextInputBase, TextInputTypeEnum } from '../bases/TextInputBase';
 
@@ -9,30 +7,42 @@ import { TextInputBase, TextInputTypeEnum } from '../bases/TextInputBase';
 interface SizeProps {
     width: number //UNIT: px
     height: number //UNIT: px
-    fontSize: string
 }
 
 interface AllProps extends SizeProps {
-    isDark?: boolean
+    disabled?: boolean
 }
 
+const MainBox = styled.div<SizeProps>`
+    display:flex;
+    align-items: center;
+    gap: 10px;
+    
+    width: ${props => `${props.width}px`};
+    height: ${props => `${props.height}px`};
+`;
+
+const PrefixBox = styled.div`
+`;
 
 
 const CoolStyledTextInput = styled(TextInputBase) <AllProps>`
-    padding: 5px;
-    font-size: ${props => props.fontSize};
+    padding: .5rem;
+    border-radius: 12px;
+    font-size: 1rem;
     width: ${props => `${props.width}px`};
     height: ${props => `${props.height}px`};
-    background: ${props => props.isDark ? props.theme.color.mainColor : props.theme.color.lightBackground};
-    color: ${props => props.isDark ? props.theme.color.lightFont : props.theme.color.darkFont};
+    background-color: ${props => props.disabled ? props.theme.color.main.l4 : props.theme.color.main.l5} ;
+    color: ${props => props.theme.color.main.d7};
     border: none;
+    cursor: ${props => props.disabled ? 'default' : undefined};
     transition: border .2s;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-around;
     overflow: hidden;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     outline:none;
     @media ${device.desktopL} { 
         width: ${props => `${1.2 * props.width}px`};
@@ -47,18 +57,18 @@ const CoolStyledTextInput = styled(TextInputBase) <AllProps>`
     }
     & div {
         overflow: hidden;
-
         width: 80%;
     }
     &:focus {
-        border: 3px solid ${props => props.theme.color.highlightColor};
+        border: 2px solid ${props => props.disabled ? undefined : props.theme.color.highlight.n};
+        background-color: ${props => props.disabled ? undefined : props.theme.color.main.l6} ;
         transition: border .2s;
     }
     transition: background .2s;
     
     &:hover {
         transition: background .2s;
-        background-color: ${props => props.theme.color.hoverInputLight} ;
+        background-color: ${props => props.disabled ? undefined : props.theme.color.main.l6} ;
     }
     
 `;
@@ -67,25 +77,28 @@ const CoolStyledTextInput = styled(TextInputBase) <AllProps>`
 const getSize = (size?: SizeEnum): SizeProps => {
     switch (size) {
         case SizeEnum.L:
-            return { width: 300, height: 40, fontSize: '1rem' }
+            return { width: 350, height: 50 }
         case SizeEnum.M:
-            return { width: 250, height: 40, fontSize: '1rem' }
+            return { width: 300, height: 50 }
         case SizeEnum.S:
-            return { width: 200, height: 40, fontSize: '1rem' }
+            return { width: 200, height: 50 }
         case SizeEnum.XS:
-            return { width: 100, height: 40, fontSize: '1rem' }
+            return { width: 100, height: 50 }
         default:
-            return { width: 250, height: 40, fontSize: '1rem' }
+            return { width: 300, height: 50 }
     }
 }
 
-export function CoolTextInput({ id, value, setValue, size, isDark, type = TextInputTypeEnum.TEXT }: {
-    id: string, value: string, setValue: (value: string) => void, size?: SizeEnum, isDark?: boolean, type?: TextInputTypeEnum
+export function CoolTextInput({ id, value, setValue, size, type = TextInputTypeEnum.TEXT, disabled = false, phonePrefix }: {
+    id: string, value: string, setValue: (value: string) => void, size?: SizeEnum, type?: TextInputTypeEnum, disabled?: boolean, phonePrefix?: string
 }) {
 
     const sizeInfo = getSize(size)
 
     return (
-        <CoolStyledTextInput height={sizeInfo.height} width={sizeInfo.width} fontSize={sizeInfo.fontSize} setValue={setValue} value={value} isDark={isDark} type={type} />
+        <MainBox height={sizeInfo.height} width={sizeInfo.width}>
+            {phonePrefix ? <PrefixBox>{phonePrefix}</PrefixBox> : <></>}
+            <CoolStyledTextInput height={sizeInfo.height} width={sizeInfo.width} setValue={setValue} value={value} type={type} disabled={disabled} />
+        </MainBox>
     )
 }
