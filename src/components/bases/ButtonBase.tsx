@@ -5,11 +5,11 @@ const ButtonStyled = styled.button`
 overflow: hidden;
 `;
 
-export function ButtonBase({ onClick, className, children }: {
-    onClick?: MouseEventHandler<HTMLButtonElement>, className?: string, children?: JSX.Element | JSX.Element[]
+export function ButtonBase({ onClick, className, children, disabled }: {
+    onClick?: MouseEventHandler<HTMLButtonElement>, className?: string, children?: JSX.Element | JSX.Element[], disabled?: boolean
 }) {
 
     return (
-        <ButtonStyled className={className} onClick={onClick}>{children}</ButtonStyled>
+        <ButtonStyled className={className} onClick={onClick} disabled={disabled}>{children}</ButtonStyled>
     )
 }

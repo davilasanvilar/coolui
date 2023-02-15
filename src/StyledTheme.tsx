@@ -104,6 +104,7 @@ export const StyledTheme = ({ children }: { children: ReactNode }) => {
     d3: '#8B2323',
     d4: '#771E1E',
     d5: '#631919',
+    lowOp: '#c8323263'
   }
 
   const highlight: ColorShades = {
