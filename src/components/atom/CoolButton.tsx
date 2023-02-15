@@ -12,6 +12,7 @@ export enum ButtonStyleEnum {
 
 interface SizeProps {
     width: number //UNIT: px
+    fullWidth?: boolean;
     height: number //UNIT: px
 }
 
@@ -22,11 +23,11 @@ interface AllProps extends SizeProps {
 }
 
 const CoolStyledButton = styled(ButtonBase) <AllProps>`
-    padding: .5rem;
+    padding: 12px 16px;
     font-size: 1rem;
+    height: 12px;
     border-radius: 12px;
-    width: ${props => `${props.width}px`};
-    height: ${props => `${props.height}px`};
+    width: ${props => props.fullWidth ? '100%' : `${props.width}px`};
     min-width: ${props => `${props.width}px`};
     min-height: ${props => `${props.height}px`};
     background-color: ${props => props.disabled ?
@@ -40,8 +41,8 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     color: ${props => props.style === ButtonStyleEnum.FILLED ? props.theme.color.main.l7 : props.theme.color[props.color ? props.color : 'main'].l3};
     border: ${props => props.style === ButtonStyleEnum.OUTLINED ? `2px solid ${props.theme.color[props.color ? props.color : 'main'].l3}}` : '2px solid transparent'};
     transition: background .2s;
-    box-sizing: border-box;
     display: flex;
+    gap: 4px;
     align-items: center;
     justify-content: space-around;
     overflow: hidden;
@@ -52,8 +53,6 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
 
     & svg {
         font-size: 1.2rem;
-        width: '20%';
-        margin-right: '5%';
         box-sizing: border-box;
     }
     & div {
@@ -100,16 +99,16 @@ const getSize = (size?: SizeEnum): SizeProps => {
 
 
 
-export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, disabled = false, color }: {
+export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, disabled = false, color, fullWidth }: {
     onClick?: MouseEventHandler<HTMLButtonElement>, children?: string | JSX.Element | JSX.Element[], className?: string, iconType?: IconTypeEnum,
-    size?: SizeEnum, style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors
+    size?: SizeEnum, style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors, fullWidth?:boolean
 }) {
 
     const sizeInfo = getSize(size)
 
     return (
         <CoolStyledButton disabled={disabled} className={className} height={sizeInfo.height} width={sizeInfo.width}
-            onClick={onClick} style={style} color={color}>
+            onClick={onClick} style={style} color={color} fullWidth={fullWidth}>
             {iconType !== undefined ? <CoolIcon type={iconType} /> : <></>}
             {children ? <div>{children}</div> : <></>}
         </CoolStyledButton>
