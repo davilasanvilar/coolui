@@ -1,25 +1,14 @@
 // import original module declarations
 import "styled-components";
+import { ColorShades } from "./StyledTheme";
 
 // and extend them!
 export interface ThemeColors {
-  bgColor: string;
-  mainColor: string;
-  secondColor: string;
-  highlightColor: string;
-  mainColorLowOp: string;
-  modalBackground: string;
-  lightBackground: string;
-  lightFont: string;
-  darkFont: string;
-  button: string;
-  buttonHover: string;
-  inactive:string;
-  inputDark: string;
-  danger: string;
-  inputLight:string;
-  hoverInputLight: string;
-  hoverInputDark: string;
+  background: ColorShades;
+  main: ColorShades;
+  second: ColorShades;
+  danger: ColorShades;
+  highlight: ColorShades;
 }
 
 interface ThemeFontSizes {
@@ -28,6 +17,7 @@ interface ThemeFontSizes {
   buttonLabel: string;
   h1: string;
   h2: string;
+  title: string;
 }
 
 declare module "styled-components" {

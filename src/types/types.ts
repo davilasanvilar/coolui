@@ -32,31 +32,49 @@ export enum ButtonTypeEnum {
 }
 
 export enum IconTypeEnum {
-    PREVIOUS,
-    NEXT,
-    LOGOUT,
-    CANCEL,
-    CONFIRM,
-    CLOSE,
-    USER,
-    LOGIN,
-    DELETE,
-    EDIT
+  PREVIOUS,
+  NEXT,
+  LOGOUT,
+  CANCEL,
+  CONFIRM,
+  CLOSE,
+  USER,
+  LOGIN,
+  DELETE,
+  EDIT,
+  ADD,
+  CHECK,
+  SEARCH,
+  MAIL,
+  ARROW_NEXT,
+  ARROW_PREVIOUS,
+  PHONE,
+  DONWLOAD,
+  UPLOAD,
+  ALERT,
+  MAP,
+  PDF,
+  MEETING,
+  LOG,
+  FILE,
+  INCIDENCE,
+  PROGRESS,
+  IMPORTANT,
+  REDO,
 }
 
 export enum ColorEnum {
-  DANGER='danger'
+  DANGER = "danger",
 }
 
 export interface SelectOption {
-  label:string
-  value:string
+  label: string;
+  value: string;
 }
-
 
 export interface ContextOption {
   type: IconTypeEnum;
-  onClick: (ids:string[]) => void;
+  onClick: (ids: string[]) => void;
 }
 
 export interface ModalButton {
