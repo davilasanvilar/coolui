@@ -78,7 +78,7 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
 
     &:active {
         outline:none;
-        border: 1.5px solid ${props => props.isActive ? props.theme.color.highlight.n : 'transparent'} !important;
+        border: 2px solid ${props => props.isActive ? props.theme.color.highlight.n : 'transparent'} !important;
     }
 `;
 

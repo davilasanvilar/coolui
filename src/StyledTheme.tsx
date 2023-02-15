@@ -112,7 +112,7 @@ export const StyledTheme = ({ children }: { children: ReactNode }) => {
     l3: '#D86666',
     l2: '#D25454',
     l1: '#CD4242',
-    n: '#C83232',
+    n: '#FFC64D',
     d1: '#B32D2D',
     d2: '#9F2828',
     d3: '#8B2323',
