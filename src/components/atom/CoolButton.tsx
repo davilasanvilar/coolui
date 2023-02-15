@@ -38,7 +38,7 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
         props.theme.color[props.color ? props.color : 'main'].l5};
     outline:none;
     color: ${props => props.style === ButtonStyleEnum.FILLED ? props.theme.color.main.l7 : props.theme.color[props.color ? props.color : 'main'].l3};
-    border: ${props => props.style === ButtonStyleEnum.OUTLINED ? `1.5px solid ${props.theme.color[props.color ? props.color : 'main'].l3}}` : '1.5px solid transparent'};
+    border: ${props => props.style === ButtonStyleEnum.OUTLINED ? `2px solid ${props.theme.color[props.color ? props.color : 'main'].l3}}` : '2px solid transparent'};
     transition: background .2s;
     box-sizing: border-box;
     display: flex;
@@ -65,8 +65,8 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     
     &:hover {
         transition: background .2s;
-        border-color: ${props => props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined} ;
-        color: ${props => props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined} ;
+        border-color: ${props => props.isActive ? (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined) : undefined} !important ;
+        color: ${props => props.isActive ? (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined) : undefined} !important;
         background: ${props => props.isActive ? (
         props.style === ButtonStyleEnum.FILLED ?
             props.theme.color[props.color ? props.color : 'main'].d1
