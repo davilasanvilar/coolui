@@ -35,7 +35,7 @@ const IconBox = styled.span`
     display: flex;
     width: 25%;
     height: 5vh;
-    font-size: ${props => props.theme.fontSize.buttonLabel};
+    font-size: ${props => props.theme.fontSize.buttonText};
     box-sizing: border-box;
     align-items: center;
     @media ${device.desktopL} {

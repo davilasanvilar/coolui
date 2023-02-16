@@ -130,11 +130,11 @@ export const StyledTheme = ({ children }: { children: ReactNode }) => {
   const regularText = '.9rem'
   const highText = '1rem'
   const title = '1.4rem'
-  const buttonLabel = '1rem'
+  const buttonText = 'rem'
   const h1 = '1.8rem'
   const h2 = '1.2rem'
 
-  const fontSize = { regularText, h1, buttonLabel, highText, h2, title }
+  const fontSize = { regularText, h1, buttonText, highText, h2, title }
 
   const value: DefaultTheme = {
     color,

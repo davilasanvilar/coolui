@@ -15,7 +15,7 @@ interface AllProps extends SizeProps {
 const MainBox = styled.div<AllProps>`
     display:flex;
     padding: 14px 24px;
-    font-size: ${props => props.theme.fontSize.buttonLabel};
+    font-size: ${props => props.theme.fontSize.buttonText};
     width: ${props => `${props.width}px`};
     min-height: 52px;
     height: 52px;
