@@ -11,8 +11,7 @@ export enum ButtonStyleEnum {
 }
 
 interface SizeProps {
-    width: number //UNIT: px
-    fullWidth?: boolean;
+    width?: number //UNIT: px
 }
 
 interface AllProps extends SizeProps {
@@ -28,8 +27,8 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     height: 49px;
     box-sizing: border-box;
     border-radius: 14px;
-    min-width: ${props => props.fullWidth ? '100%' : `${props.width}px`};
-    width: ${props => props.fullWidth ? '100%' : `${props.width}px`};
+    min-width: ${props => props.width ? `${props.width}px` : '100%'};
+    width: ${props => props.width ? `${props.width}px` : '100%'};
     background-color: ${props => props.disabled ?
         props.theme.color[props.color ? props.color : 'main'].l5
         :
@@ -86,22 +85,22 @@ const getSize = (size?: SizeEnum): SizeProps => {
         case SizeEnum.XS:
             return { width: 100 }
         default:
-            return { width: 200 }
+            return { width: undefined }
     }
 }
 
 
 
-export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, disabled = false, color, fullWidth }: {
+export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, disabled = false, color }: {
     onClick?: MouseEventHandler<HTMLButtonElement>, children?: string | JSX.Element | JSX.Element[], className?: string, iconType?: IconTypeEnum,
-    size?: SizeEnum, style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors, fullWidth?: boolean
+    size?: SizeEnum, style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors
 }) {
 
     const sizeInfo = getSize(size)
 
     return (
         <CoolStyledButton disabled={disabled} className={className} width={sizeInfo.width}
-            onClick={onClick} style={style} color={color} fullWidth={fullWidth}>
+            onClick={onClick} style={style} color={color}>
             {iconType !== undefined ? <CoolIcon type={iconType} /> : <></>}
             {children ? <div>{children}</div> : <></>}
         </CoolStyledButton>
