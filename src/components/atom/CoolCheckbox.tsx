@@ -54,7 +54,7 @@ const CustomCheckbox = styled.div<AllProps>`
 
 const CoolStyledCheckbox = styled.div<AllProps>`
     padding: 5px;
-    font-size: 1rem;
+    font-size: ${props => props.theme.fontSize.regularText}; 
     width: ${props => `${props.width}px`};
     height: ${props => `${props.width}px`};
     transition: border .2s;
@@ -94,7 +94,7 @@ const CoolStyledCheck = styled.div<AllProps>`
 const CoolStyledLabel = styled.label<AllProps>`
     margin-left: 10px;
     color: ${props => props.theme.color.main.d7};
-    opacity: ${props => props.disabled ? .6 : undefined };
+    opacity: ${props => props.disabled ? .6 : undefined};
 `
 
 

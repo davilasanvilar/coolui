@@ -76,6 +76,7 @@ export const StyledTheme = ({ children }: { children: ReactNode }) => {
     d5: '',
     d6: '',
     d7: '#0B1223',
+    lowOp: '#3659b03c'
   }
 
   const second: ColorShades = {
@@ -129,7 +130,7 @@ export const StyledTheme = ({ children }: { children: ReactNode }) => {
   const regularText = '.9rem'
   const highText = '1rem'
   const title = '1.4rem'
-  const buttonLabel = '1.3rem'
+  const buttonLabel = '1rem'
   const h1 = '1.8rem'
   const h2 = '1.2rem'
 

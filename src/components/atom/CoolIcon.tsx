@@ -2,7 +2,7 @@ import { AiOutlineDelete, AiOutlineEdit, AiOutlineFile, AiOutlineFilePdf, AiOutl
 import { BsArrowLeftShort, BsArrowRightShort, BsCheck, BsCheck2, BsMap } from 'react-icons/bs';
 import { CgCloseR } from 'react-icons/cg';
 import { FiMail } from 'react-icons/fi';
-import { FaRedo, FaRegListAlt, FaSignInAlt, FaUserCircle } from 'react-icons/fa';
+import { FaCheck, FaRedo, FaRegListAlt, FaSignInAlt, FaUserCircle } from 'react-icons/fa';
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext, MdOutlineCancel } from 'react-icons/md';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import { IoMdAddCircleOutline, IoMdPeople, IoMdPhonePortrait } from 'react-icons/io';
@@ -10,6 +10,7 @@ import { BiDownload, BiUpload } from 'react-icons/bi';
 import { TbFileAlert } from 'react-icons/tb';
 import { ImWarning } from 'react-icons/im';
 import { GrInProgress } from 'react-icons/gr';
+import { GoCheck } from 'react-icons/go';
 import { IconTypeEnum } from '../../types/types';
 
 
@@ -38,7 +39,7 @@ const getIcon = (type: IconTypeEnum): JSX.Element => {
         case IconTypeEnum.ADD:
             return <IoMdAddCircleOutline />
         case IconTypeEnum.CHECK:
-            return <BsCheck2 />
+            return <GoCheck />
         case IconTypeEnum.SEARCH:
             return <AiOutlineSearch />
         case IconTypeEnum.MAIL:

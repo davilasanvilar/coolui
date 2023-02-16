@@ -23,13 +23,13 @@ interface AllProps extends SizeProps {
 
 const CoolStyledButton = styled(ButtonBase) <AllProps>`
     padding: 15px 20px;
-    font-size: 1rem;
-    height: 49px;
+    font-size: ${props => props.theme.fontSize.buttonLabel};
     min-height: 49px;
+    height: 49px;
     box-sizing: border-box;
     border-radius: 14px;
-    width: ${props => props.fullWidth ? '100%' : `${props.width}px`};
     min-width: ${props => props.fullWidth ? '100%' : `${props.width}px`};
+    width: ${props => props.fullWidth ? '100%' : `${props.width}px`};
     background-color: ${props => props.disabled ?
         props.theme.color[props.color ? props.color : 'main'].l5
         :
