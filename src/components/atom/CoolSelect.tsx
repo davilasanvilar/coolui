@@ -10,7 +10,7 @@ interface AllProps {
 
 const CoolStyledSelect = styled(SelectBase) <AllProps>`
     padding: 14px 24px;
-    border-radius: 12px;
+    border-radius: 14px;
     font-size: ${props => props.theme.fontSize.regularText};
     width: 100%;
     min-height: 52px;
