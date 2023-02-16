@@ -8,14 +8,12 @@ import styled from 'styled-components';
 import { LoginScreen } from './screens/LoginScreen';
 import { CoolModal } from './components/organism/CoolModal';
 import { ConfirmationModal } from './components/organism/ConfirmationModal';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { CoolSnackbar } from './components/atom/CoolSnackbar';
 
 
 const MainBox = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: ${props => props.theme.color.bgColor};
+  background-color: ${props => props.theme.color.background.n};
   `;
 
 
@@ -36,7 +34,7 @@ function Body() {
             <Loading />
             <CoolModal/>
             <ConfirmationModal/>
-            <CoolSnackbar/>
+            {/* <CoolSnackbar/> */}
           </>
           :
           <LoadingScreen />
