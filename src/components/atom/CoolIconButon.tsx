@@ -1,76 +1,93 @@
-import React, { MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 import { IconTypeEnum, SizeEnum } from '../../types/types';
-import { device } from '../../StyledTheme';
 import { ButtonBase } from '../bases/ButtonBase';
 import { CoolIcon } from './CoolIcon';
+import { ButtonStyleEnum } from './CoolButton';
+import { ThemeColors } from '../../styled';
 
 
 interface SizeInfoProps {
     width: number //UNIT: px
-    height: number //UNIT: px
-    fontSize: string
 }
 
 interface CoolStyledIconButtonProps extends SizeInfoProps {
-    isDark: boolean
-    isActive: boolean
-    padding?: number
+    style: ButtonStyleEnum
+    disabled?: boolean
+    color?: keyof ThemeColors
 }
 
 const CoolStyledIconButton = styled(ButtonBase) <CoolStyledIconButtonProps>`
-    color: ${props => props.isDark ? props.theme.color.bgColor : props.theme.color.mainColor};
+    color: ${props => props.style === ButtonStyleEnum.FILLED ? props.theme.color.main.l6 : props.theme.color.main.n};
+    /* padding: ${props => `${props.width / 5}px`}; */
     border-radius: 50%;
-    @media ${device.desktopL} { 
-        width: ${props => `${1.2 * props.width}px`};
-        height: ${props => `${1.2 * props.height}px`};
-    }
+
+    min-width: ${props => `${props.width}px`};
+    min-height: ${props => `${props.width}px`};
     width: ${props => `${props.width}px`};
-    height: ${props => `${props.height}px`};
-    border: none;
-    font-size: ${props => `${props.fontSize}`};
-    background-color: ${props => props.isActive ? props.isDark ? props.theme.color.mainColor : props.theme.color.bgColor : props.theme.color.inactive};
+    height: ${props => `${props.width}px`};
+    color: ${props => props.style === ButtonStyleEnum.FILLED ?
+        props.theme.color.main.l7 : props.theme.color[props.color ? props.color : 'main'].l2};
+    border: ${props => props.style === ButtonStyleEnum.OUTLINED ? `2px solid ${props.theme.color[props.color ? props.color : 'main'].l3}}` : '2px solid transparent'};
+    font-size: 4rem;
+    background-color: ${props => props.disabled ?
+        props.theme.color[props.color ? props.color : 'main'].l5
+        :
+        (
+            props.style === ButtonStyleEnum.FILLED ?
+                props.theme.color[props.color ? props.color : 'main'].l3 :
+                'transparent')};
+
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    border: 3px solid transparent;
-    padding: ${props => `${props.padding}px`};
-
+    transition: background .2s;
+    
     &:hover {
-        color: ${props => props.isActive ? props.theme.color.highlightColor : undefined};
-        border-color: ${props => props.isActive ? props.theme.color.highlightColor : undefined};
+        transition: background .2s;
+        border-color: ${props => props.disabled ? undefined : (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined)} !important ;
+        color: ${props => props.disabled ? undefined : (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined)} !important;
+        background: ${props => props.disabled ?
+        undefined
+        :
+        (
+            props.style === ButtonStyleEnum.FILLED ?
+                props.theme.color[props.color ? props.color : 'main'].d1
+                :
+                undefined)};
     }
-    &:hover svg {
-        color: ${props => props.isActive ? props.theme.color.highlightColor : undefined};
+    &:enabled:active {
+        outline:none;
+        transform: scale(0.9)
     }
     `;
 
 
-export function CoolIconButton({ clickFun, className, type, size, isDark = false, isActive = true }: {
-    clickFun?: MouseEventHandler<HTMLButtonElement>, className?: string, type: IconTypeEnum, size?: SizeEnum, isDark?: boolean, isActive?: boolean
+export function CoolIconButton({ onClick, className, type, size, disabled, style = ButtonStyleEnum.FILLED, color }: {
+    onClick?: MouseEventHandler<HTMLButtonElement>, className?: string, type: IconTypeEnum, size?: SizeEnum, disabled?: boolean, style?: ButtonStyleEnum, color?: keyof ThemeColors
 }) {
 
     const getSize = (): SizeInfoProps => {
         switch (size) {
             case SizeEnum.L:
-                return { width: 70, height: 70, fontSize: '5rem' }
+                return { width: 80 }
             case SizeEnum.M:
-                return { width: 60, height: 60, fontSize: '5rem' }
+                return { width: 60 }
             case SizeEnum.S:
-                return { width: 50, height: 50, fontSize: '5rem' }
+                return { width: 40 }
             case SizeEnum.XS:
-                return { width: 25, height: 25, fontSize: '5rem' }
+                return { width: 30 }
             default:
-                return { width: 60, height: 60, fontSize: '5rem' }
+                return { width: 60 }
         }
     }
 
     const sizeInfo = getSize()
 
     return (
-        <CoolStyledIconButton padding={size === SizeEnum.XS ? 2 : undefined} height={sizeInfo.height} width={sizeInfo.width} fontSize={sizeInfo.fontSize} isDark={isDark} isActive={isActive} clickFun={isActive ? clickFun : undefined}>
-            <CoolIcon type={type}/>
+        <CoolStyledIconButton className={className} width={sizeInfo.width} style={style} disabled={disabled} color={color} onClick={disabled ? undefined : onClick}>
+            <CoolIcon type={type} />
         </CoolStyledIconButton>
     )
 }
