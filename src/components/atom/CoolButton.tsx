@@ -21,10 +21,10 @@ interface AllProps extends SizeProps {
 }
 
 const CoolStyledButton = styled(ButtonBase) <AllProps>`
-    padding: 15px 20px;
+    padding: 14px 24px;
     font-size: ${props => props.theme.fontSize.buttonLabel};
-    min-height: 49px;
-    height: 49px;
+    min-height: 52px;
+    height: 52px;
     box-sizing: border-box;
     border-radius: 14px;
     min-width: ${props => props.width ? `${props.width}px` : '100%'};

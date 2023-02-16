@@ -21,11 +21,12 @@ const PrefixBox = styled.div`
 
 
 const CoolStyledTextInput = styled(TextInputBase) <AllProps>`
-    padding: .5rem;
+    padding: 14px 24px;
     border-radius: 14px;
     font-size: ${props => props.theme.fontSize.regularText};
     width: 100%;
-    height: 50px;
+    min-height: 52px;
+    height: 52px;
     background-color: ${props => props.disabled ? props.theme.color.main.l4 : props.theme.color.main.l6} ;
     color: ${props => props.theme.color.main.d7};
     border: none;
