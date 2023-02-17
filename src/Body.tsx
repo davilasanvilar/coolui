@@ -8,11 +8,16 @@ import styled from 'styled-components';
 import { LoginScreen } from './screens/LoginScreen';
 import { CoolModal } from './components/organism/CoolModal';
 import { ConfirmationModal } from './components/organism/ConfirmationModal';
+import { device } from './StyledTheme';
 
 
 const MainBox = styled.div`
   width: 100%;
   height: 100vh;
+  @media ${device.tablet} { 
+    height: 100%;
+  }
+  overflow-y: auto;
   background-color: ${props => props.theme.color.background.n};
   `;
 
@@ -32,8 +37,8 @@ function Body() {
               <Route path="/" element={<Inicio />} />
             </Routes>
             <Loading />
-            <CoolModal/>
-            <ConfirmationModal/>
+            <CoolModal />
+            <ConfirmationModal />
             {/* <CoolSnackbar/> */}
           </>
           :

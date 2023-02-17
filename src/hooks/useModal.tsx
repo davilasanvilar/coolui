@@ -1,8 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { Rol, User } from '../types/entities';
 import { ModalType, RolEnum } from '../types/types';
-import { useApi } from './useApi';
-import { useNavigate } from 'react-router-dom';
 
 
 export interface ModalContext {
@@ -27,7 +24,7 @@ export interface ModalProps {
 export interface ModalParams {
   body?: string
   elementId?: string
-  onConfirm?: () => void
+  onConfirm?: () => Promise<void>
 }
 
 const ModalContext = createContext<ModalContext>({} as any)

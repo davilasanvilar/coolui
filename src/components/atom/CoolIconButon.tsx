@@ -26,6 +26,7 @@ const CoolStyledIconButton = styled(ButtonBase) <CoolStyledIconButtonProps>`
     min-height: ${props => `${props.width}px`};
     width: ${props => `${props.width}px`};
     height: ${props => `${props.width}px`};
+    flex-shrink: 0;
     color: ${props => props.style === ButtonStyleEnum.FILLED ?
         props.theme.color.main.l7 : props.theme.color[props.color ? props.color : 'main'].l2};
     border: ${props => props.style === ButtonStyleEnum.OUTLINED ? `2px solid ${props.theme.color[props.color ? props.color : 'main'].l3}}` : '2px solid transparent'};
@@ -59,7 +60,7 @@ const CoolStyledIconButton = styled(ButtonBase) <CoolStyledIconButtonProps>`
     }
     &:enabled:active {
         outline:none;
-        transform: scale(0.9)
+        transform: scale(0.95)
     }
     `;
 

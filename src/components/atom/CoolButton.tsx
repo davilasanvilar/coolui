@@ -25,6 +25,7 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     font-size: ${props => props.theme.fontSize.buttonText};
     min-height: 46px;
     height: 46px;
+    flex-shrink: 0;
     box-sizing: border-box;
     border-radius: 14px;
     min-width: ${props => props.width ? `${props.width}px` : undefined};
@@ -65,7 +66,7 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     }
     &:enabled:active {
         outline:none;
-        transform: scale(0.9)
+        transform: scale(0.95)
     }
 `;
 

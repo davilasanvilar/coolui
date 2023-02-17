@@ -23,14 +23,6 @@ export enum SizeEnum {
   XL,
 }
 
-export enum ButtonTypeEnum {
-  SAVE,
-  CANCEL,
-  EDIT,
-  DELETE,
-  CONFIRM,
-}
-
 export enum IconTypeEnum {
   PREVIOUS,
   NEXT,
@@ -80,8 +72,11 @@ export interface ContextOption {
 export interface ModalButton {
   type: IconTypeEnum;
   onClick: () => void;
+  label?: JSX.Element | string;
 }
 
 export enum ModalType {
-  CONFIRMATION,
+  S_MODAL,
+  M_MODAL,
+  L_MODAL,
 }

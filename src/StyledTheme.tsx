@@ -13,13 +13,13 @@ const size = {
 }
 
 export const device = {
-  mobileS: `(min-width: ${size.mobileS})`,
-  mobileM: `(min-width: ${size.mobileM})`,
-  mobileL: `(min-width: ${size.mobileL})`,
-  tablet: `(min-width: ${size.tablet})`,
-  laptop: `(min-width: ${size.laptop})`,
-  desktop: `(min-width: ${size.desktop})`,
-  desktopL: `(min-width: ${size.desktop})`
+  mobileS: `(max-width: ${size.mobileS})`,
+  mobileM: `(max-width: ${size.mobileM})`,
+  mobileL: `(max-width: ${size.mobileL})`,
+  tablet: `(max-width: ${size.tablet})`,
+  laptop: `(max-width: ${size.laptop})`,
+  desktop: `(max-width: ${size.desktop})`,
+  desktopL: `(max-width: ${size.desktop})`
 };
 
 export interface ColorShades {
@@ -130,11 +130,12 @@ export const StyledTheme = ({ children }: { children: ReactNode }) => {
   const regularText = '.9rem'
   const highText = '1rem'
   const title = '1.4rem'
-  const buttonText = 'rem'
+  const modalTitle = '1.4rem'
+  const buttonText = '.9rem'
   const h1 = '1.8rem'
   const h2 = '1.2rem'
 
-  const fontSize = { regularText, h1, buttonText, highText, h2, title }
+  const fontSize = { regularText, h1, buttonText, highText, h2, title, modalTitle }
 
   const value: DefaultTheme = {
     color,
