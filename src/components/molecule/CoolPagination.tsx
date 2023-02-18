@@ -14,7 +14,7 @@ const MainBox = styled.div`
     align-self: center;
     box-sizing: border-box;
     justify-content: space-evenly;
-    align-items: flex-end;
+    align-items: center;
     margin-top: 4vh;
 `;
 
