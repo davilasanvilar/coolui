@@ -5,12 +5,14 @@ import { ApiProvider } from './hooks/useApi';
 import { AuthProvider } from './hooks/useAuth';
 import { MiscProvider } from './hooks/useMisc';
 import { ModalProvider } from './hooks/useModal';
+import { SnackbarProvider } from './hooks/useSnackbar';
 import { StyledTheme } from './StyledTheme';
 
 
 function App() {
   return (<>
-      <MiscProvider>
+    <MiscProvider>
+      <SnackbarProvider>
         <ApiProvider>
           <AuthProvider>
             <ModalProvider>
@@ -22,7 +24,8 @@ function App() {
             </ModalProvider>
           </AuthProvider>
         </ApiProvider>
-      </MiscProvider>
+      </SnackbarProvider>
+    </MiscProvider>
   </>
   );
 }

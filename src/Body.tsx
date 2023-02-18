@@ -9,6 +9,7 @@ import { LoginScreen } from './screens/LoginScreen';
 import { CoolModal } from './components/organism/CoolModal';
 import { ConfirmationModal } from './components/organism/ConfirmationModal';
 import { device } from './StyledTheme';
+import { CoolSnackbar } from './components/atom/CoolSnackbar';
 
 
 const MainBox = styled.div`
@@ -17,7 +18,7 @@ const MainBox = styled.div`
   @media ${device.tablet} { 
     height: 100%;
   }
-  overflow-y: auto;
+  overflow-y: hidden;
   background-color: ${props => props.theme.color.background.n};
   `;
 
@@ -39,7 +40,7 @@ function Body() {
             <Loading />
             <CoolModal />
             <ConfirmationModal />
-            {/* <CoolSnackbar/> */}
+            <CoolSnackbar/>
           </>
           :
           <LoadingScreen />
