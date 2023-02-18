@@ -200,7 +200,10 @@ export function CoolTable({ id, headers, data, setPage, contextOptions, isLoadin
             if (!selectedElements.includes(id)) {
                 setSelectedElements([id])
             }
-            setContextMenuProps({ top: e.clientY, left: e.clientX, visible: true })
+            setContextMenuProps({
+                top: e.clientY, left: e.clientX, visible: true, nOptions: contextOptions.length,
+                invertedX: e.clientX > window.innerWidth / 2, invertedY: e.clientY > innerHeight / 2
+            })
         }
     }
 
@@ -260,7 +263,8 @@ export function CoolTable({ id, headers, data, setPage, contextOptions, isLoadin
                     undefined
                 }
                 {contextOptions ?
-                    <CoolContextMenu top={contextMenuProps.top} left={contextMenuProps.left} visible={contextMenuProps.visible} options={contextOptions} selectedElements={selectedElements}></CoolContextMenu>
+                    <CoolContextMenu top={contextMenuProps.top} left={contextMenuProps.left} visible={contextMenuProps.visible}
+                        invertedX={contextMenuProps.invertedX} invertedY={contextMenuProps.invertedY} options={contextOptions} selectedElements={selectedElements}></CoolContextMenu>
                     : undefined
                 }
             </TableWithPagBox>

@@ -9,6 +9,9 @@ export interface ContextMenuPosition {
     top: number;
     left: number;
     visible: boolean;
+    invertedX?: boolean;
+    invertedY?: boolean;
+    nOptions?: number;
 }
 
 const MainBox = styled.div<ContextMenuPosition>`
@@ -21,15 +24,19 @@ const MainBox = styled.div<ContextMenuPosition>`
     width: 125px;
     background: ${props => props.theme.color.background.n};
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    box-sizing: border-box;
-    top: ${props => `${props.top}px`};
-    left: ${props => `${props.left}px`};
+    box-sizing: border-box;  
+    top: ${props => `${props.top - (props.invertedY && props.nOptions ? 46 * props.nOptions : 0)}px`};
+    left: ${props => `${props.left - (props.invertedX ? 125 : 0)}px`};
     z-index: 10;
 `;
 
 
 
-export function CoolContextMenu({ visible, top, left, options, selectedElements }: { visible: boolean, top: number, left: number, options: ContextOption[], selectedElements: string[] }) {
+export function CoolContextMenu({ visible, top, left, invertedX, invertedY, options, selectedElements }: {
+    visible: boolean, top: number, left: number,
+    invertedX?: boolean, invertedY?: boolean, options: ContextOption[], selectedElements: string[]
+}) {
+
     const wrapperRef = useRef<HTMLDivElement | null>(null);
 
     const { setClearContext } = useMisc()
@@ -38,9 +45,9 @@ export function CoolContextMenu({ visible, top, left, options, selectedElements 
 
     return (
         visible ?
-            <MainBox ref={wrapperRef} top={top} left={left} visible={visible}>
+            <MainBox ref={wrapperRef} top={top} left={left} invertedX={invertedX} invertedY={invertedY} nOptions={options.length} visible={visible}>
                 {options.map((option) =>
-                    <CoolContextOption key={option.type} type={option.type} disabled={selectedElements.length > 1 && !(option.multi)} 
+                    <CoolContextOption key={option.type} type={option.type} disabled={selectedElements.length > 1 && !(option.multi)}
                         onClick={() => option.onClick(selectedElements)} label={option.label}></CoolContextOption>
                 )}
             </MainBox >
