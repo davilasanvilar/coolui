@@ -13,8 +13,8 @@ const CoolStyledSelect = styled(SelectBase) <AllProps>`
     border-radius: 14px;
     font-size: ${props => props.theme.fontSize.regularText};
     width: 100%;
-    min-height: 52px;
-    height: 52px;
+    min-height: 46px;
+    height: 46px;
     background-color: ${props => props.disabled ? props.theme.color.main.l4 : props.theme.color.main.l6} ;
     color: ${props => props.theme.color.main.d7};
     border: none;
