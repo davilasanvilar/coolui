@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { SizeEnum } from '../../types/types';
 import { device } from '../../StyledTheme';
 import { TextInputBase, TextInputTypeEnum } from '../bases/TextInputBase';
+import { CoolIcon, IconTypeEnum } from './CoolIcon';
 
 
 interface AllProps {
@@ -11,9 +12,15 @@ interface AllProps {
 const MainBox = styled.div`
     display:flex;
     align-items: center;
-    gap: 10px;
+    gap: 4px;
     width: 100%;
-    height: 50px;
+    & svg {
+        font-size: 1.5rem;
+        margin-right: 5px;
+        color: ${props => props.theme.color.main.l3}
+    }
+    
+    height: 46px;
 `;
 
 const PrefixBox = styled.div`
@@ -25,8 +32,8 @@ const CoolStyledTextInput = styled(TextInputBase) <AllProps>`
     border-radius: 14px;
     font-size: ${props => props.theme.fontSize.regularText};
     width: 100%;
-    min-height: 52px;
-    height: 52px;
+    min-height: 46px;
+    height: 46px;
     background-color: ${props => props.disabled ? props.theme.color.main.l4 : props.theme.color.main.l6} ;
     color: ${props => props.theme.color.main.d7};
     border: none;
@@ -54,12 +61,13 @@ const CoolStyledTextInput = styled(TextInputBase) <AllProps>`
     
 `;
 
-export function CoolTextInput({ id, value, setValue, size, type = TextInputTypeEnum.TEXT, disabled = false, phonePrefix }: {
-    id: string, value: string, setValue: (value: string) => void, size?: SizeEnum, type?: TextInputTypeEnum, disabled?: boolean, phonePrefix?: string
+export function CoolTextInput({ id, value, setValue, size, iconType, type = TextInputTypeEnum.TEXT, disabled = false, phonePrefix }: {
+    id: string, value: string, setValue: (value: string) => void, size?: SizeEnum, iconType?: IconTypeEnum, type?: TextInputTypeEnum, disabled?: boolean, phonePrefix?: string
 }) {
 
     return (
         <MainBox>
+            {iconType ? <CoolIcon type={iconType} /> : <></>}
             {phonePrefix ? <PrefixBox>{phonePrefix}</PrefixBox> : <></>}
             <CoolStyledTextInput setValue={setValue} value={value} type={type} disabled={disabled} />
         </MainBox>
