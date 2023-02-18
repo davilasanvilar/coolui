@@ -14,7 +14,7 @@ const MainBox = styled.div`
     @media ${device.tablet} { 
         height: 100%;
     }
-    background: ${props => props.theme.color.background.l3};
+    background: ${props => props.theme.color.background.lowOp};
     backdrop-filter: blur(5px);
     display: flex;
     z-index: 40;

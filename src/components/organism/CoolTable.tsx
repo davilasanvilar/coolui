@@ -140,7 +140,6 @@ const LoadingIconBlur = styled.div<SizeProps>`
     animation-duration: 0.5s;
     background: ${props => props.theme.color.main.lowOp};
     position: sticky;
-    opacity: .4;
     display: flex;
     justify-content: center;
     align-items: center;
