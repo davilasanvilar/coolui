@@ -67,9 +67,6 @@ const CoolStyledSnackbar = styled.div<CoolStyledSnackbarProps>`
 export function CoolSnackbar() {
 
   const { snackbarProps, setSnackbarProps } = useSnackbar()
-  const [isVisible, setIsVisible] = useState<boolean>(false)
-
-
 
   useEffect(() => {
     if (snackbarProps.visible) {
