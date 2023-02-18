@@ -4,7 +4,6 @@ import { Page } from '../../types/types';
 import { CoolPagination } from '../molecule/CoolPagination';
 import { ContextMenuPosition, CoolContextMenu } from '../molecule/CoolContextMenu';
 import { PulseLoader } from 'react-spinners';
-import { CoolSearchBar } from '../atom/CoolSearchBar';
 import { useTranslation } from 'react-i18next';
 import { useMisc } from '../../hooks/useMisc';
 import { ContextOption } from '../atom/CoolContextOption';
