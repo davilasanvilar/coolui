@@ -5,7 +5,7 @@ import { FiMail } from 'react-icons/fi';
 import { FaCheck, FaRedo, FaRegListAlt, FaSignInAlt, FaUserCircle } from 'react-icons/fa';
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext, MdOutlineCancel } from 'react-icons/md';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
-import { IoMdAddCircleOutline, IoMdPeople, IoMdPhonePortrait } from 'react-icons/io';
+import { IoMdAddCircleOutline, IoMdArrowRoundBack, IoMdArrowRoundForward, IoMdPeople, IoMdPhonePortrait } from 'react-icons/io';
 import { BiDownload, BiUpload } from 'react-icons/bi';
 import { TbFileAlert } from 'react-icons/tb';
 import { ImWarning } from 'react-icons/im';
@@ -27,8 +27,6 @@ export enum IconTypeEnum {
     CHECK,
     SEARCH,
     MAIL,
-    ARROW_NEXT,
-    ARROW_PREVIOUS,
     PHONE,
     DONWLOAD,
     UPLOAD,
@@ -50,9 +48,9 @@ const getIcon = (type: IconTypeEnum): JSX.Element => {
         case IconTypeEnum.LOGOUT:
             return <RiLogoutCircleRLine />
         case IconTypeEnum.PREVIOUS:
-            return <MdOutlineNavigateBefore />
+            return <IoMdArrowRoundBack />
         case IconTypeEnum.NEXT:
-            return <MdOutlineNavigateNext />
+            return <IoMdArrowRoundForward />
         case IconTypeEnum.CANCEL:
             return <MdOutlineCancel />
         case IconTypeEnum.CONFIRM:
@@ -77,10 +75,6 @@ const getIcon = (type: IconTypeEnum): JSX.Element => {
             return <FiMail />
         case IconTypeEnum.PHONE:
             return <IoMdPhonePortrait />
-        case IconTypeEnum.ARROW_PREVIOUS:
-            return <BsArrowLeftShort />
-        case IconTypeEnum.ARROW_NEXT:
-            return <BsArrowRightShort />
         case IconTypeEnum.DONWLOAD:
             return <BiDownload />
         case IconTypeEnum.UPLOAD:
