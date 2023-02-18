@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import styled, { keyframes, useTheme } from 'styled-components';
-import { ContextOption, Page, SizeEnum } from '../../types/types';
-import { useRecoilValue } from 'recoil';
-import { clearContextAtom } from '../../recoil/mainAtoms';
+import { Page } from '../../types/types';
 import { CoolPagination } from '../molecule/CoolPagination';
-import { device } from '../../StyledTheme';
 import { ContextMenuPosition, CoolContextMenu } from '../molecule/CoolContextMenu';
 import { PulseLoader } from 'react-spinners';
+import { CoolSearchBar } from '../atom/CoolSearchBar';
+import { useTranslation } from 'react-i18next';
+import { useMisc } from '../../hooks/useMisc';
+import { ContextOption } from '../atom/CoolContextOption';
 
 
 interface SizeProps {
@@ -20,71 +21,77 @@ interface TableProps extends SizeProps {
 
 
 interface RowProps {
-    selected: boolean;
+    isSelected?: boolean;
 }
 
 
 const MainBox = styled.div<SizeProps>`
-    width: ${(props) => `${props.widthProp !== undefined ? props.widthProp : 80}%`} ;
-    height: ${(props) => `${props.heightProp !== undefined ? props.heightProp : 60}vh`} ;
+    width: ${(props) => props.widthProp !== undefined ? `${props.widthProp}%` : '100%'} ;
+    height: ${(props) => props.heightProp !== undefined ? `${props.heightProp}vh` : '100%'} ;
+    display: flex;
+    justify-content: center;
 `;
 
+const TableWithPagBox = styled.div<SizeProps>`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`;
 
 const TableBox = styled.div<TableProps>`
     width: 100% ;
     height: 100% ;
-    position: relative;
-    overflow: ${(props) => `${props.contextVisible ? 'auto' : 'auto'}`};
+    position:relative;
+    overflow:auto;
+    border: 1px solid ${props => props.theme.color.main.lowOp};
+    border-right: 0;
+    border-radius: 12px;
+
+box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 
 
 const StyledTable = styled.table`
-    color: ${(props) => props.theme.color.lightFont} ;
+    color: ${(props) => props.theme.color.main.l3} ;
     width: 100%;
-    height: 100%;
+    top:0;
     cursor: default;
     border-spacing: 0;
-    overflow: auto;
+
+    background: ${(props) => props.theme.color.background.l1};
+    font-size: ${(props) => props.theme.fontSize.regularText};
     & thead {
         width: 100%;
         z-index: 3;
-        color: ${(props) => props.theme.color.lightFont};
-        background: ${(props) => props.theme.color.mainColor};
-        font-size: ${(props) => props.theme.fontSize.highText};
-        height: 8vh;
-        @media ${device.desktopL} { 
-            height: 5vh;
-        }
         box-sizing: border-box;
         position: sticky;
-        top: 0;
+        top:0;
+        text-align: left;
     }
     & tbody {
         position:relative;
         width: 100%;
-        text-align: center;
-
-        color: ${(props) => props.theme.color.mainColor};
+        overflow: auto;
+        color: ${(props) => props.theme.color.main.d7};
     }
     & th {
-        width: 33%;
-        background: ${(props) => props.theme.color.mainColor};
+        background: ${(props) => props.theme.color.main.l3};
+        color: ${(props) => props.theme.color.background.l1};
+        padding: .3rem .2rem;
+        text-align:center;
     }
-    & tr {
-        @media ${device.desktopL} { 
-            line-height: 4vh;
-        }
-        line-height: 6vh;
+    & thead tr {
+        line-height: 45px;
     }
 
-    & tbody tr:hover {
-        background: ${props => props.theme.color.secondColor} !important;
-        color: ${(props) => props.theme.color.lightFont};
+    & tbody tr {
+        line-height: 35px;
     }
-    & tr:nth-child(odd) {
-        background: ${(props) => props.theme.color.lightBackground};
-    }
+
     & td{  
+        border-bottom: 1px solid ${props => props.theme.color.main.lowOp};
+        padding: .3rem .2rem;
+        text-align: center;
     } 
 `;
 
@@ -93,12 +100,27 @@ interface TableBodyProps {
 }
 
 const StyledTableBody = styled.tbody<TableBodyProps>`
+    padding-bottom: 50px;
 `
+
+const TableHeader = styled.th<HeaderData>`
+    width: ${props => props.width};
+`
+
+export interface HeaderData {
+    name?: string;
+    width: string;
+}
+
 
 
 const RowSelectedStyle = styled.tr<RowProps>`
-background: ${(props) => props.selected ? props.theme.color.secondColor : undefined} !important;
-color: ${(props) => props.selected ? props.theme.color.lightFont : undefined} !important;
+    &:hover {
+     background: ${props => props.isSelected ? undefined : props.theme.color.main.l5} !important;
+     color: ${props => props.isSelected ? undefined : props.theme.color.main.d7} !important;
+    }
+    background: ${(props) => props.isSelected ? props.theme.color.main.l5 : undefined} !important;
+    color: ${(props) => props.isSelected ? props.theme.color.main.d1 : undefined} !important;
 `
 
 const opacity = keyframes`
@@ -112,19 +134,20 @@ const opacity = keyframes`
 `;
 
 const LoadingIconBlur = styled.div<SizeProps>`
-    width: 100%;
     top:0;
     animation-name: ${opacity};
     animation-duration: 0.5s;
-    background: ${props => props.theme.color.modalBackground};
+    background: ${props => props.theme.color.main.lowOp};
     position: sticky;
     opacity: .4;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     height: ${(props) => `${props.heightProp !== undefined ? props.heightProp : 60}vh`} ;
     z-index:100;
     margin-top: ${(props) => `-${props.heightProp !== undefined ? props.heightProp : 60}vh`} ;
+
 `
 
 
@@ -140,16 +163,23 @@ const LoadingIconInsideBox = styled.div`
     justify-content: center;
     top: 50%;`
 
+const SearchBarBox = styled.div`
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+`
 
-export function CoolTable({ width, height, headers, data, setPage, contextOptions, isLoading = false }: {
-    width?: number, height?: number, size?: SizeEnum, headers: string[], data?: Page<any>,
-    setPage?: React.Dispatch<React.SetStateAction<number>>, contextOptions?: ContextOption[], isLoading?: boolean
+export function CoolTable({ id, headers, data, setPage, contextOptions, isLoading, page, searchKey, setSearchKey }: {
+    id: string, headers: HeaderData[], data?: Page<any>, page?: number,
+    setPage?: React.Dispatch<React.SetStateAction<number>>, contextOptions?: ContextOption[], isLoading?: boolean,
+    sideButtons?: JSX.Element[], searchKey?: string, setSearchKey?: React.Dispatch<SetStateAction<string>>
 }) {
 
 
     const [contextMenuProps, setContextMenuProps] = useState<ContextMenuPosition>({ top: 0, left: 0, visible: false })
     const [selectedElements, setSelectedElements] = useState<string[]>([])
-    const clearContext = useRecoilValue<boolean>(clearContextAtom)
+    const { clearContext } = useMisc()
+    const { t } = useTranslation()
 
     useEffect(() => {
         setContextMenuProps({ visible: false, top: 0, left: 0 })
@@ -157,66 +187,83 @@ export function CoolTable({ width, height, headers, data, setPage, contextOption
     }, [clearContext, data?.page])
 
 
-    const addSelectedElement = (id: string) => {
-        setSelectedElements((old) =>
-            [id, ...old]
-        )
+    const onSelect = (id: string) => {
+        if (selectedElements.includes(id)) {
+            setSelectedElements((oldValue) => oldValue.filter((elementId) => elementId !== id))
+        } else {
+            setSelectedElements((oldValue) => [id, ...oldValue])
+        }
     }
     const onOpenContextMenu = (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>, id: string) => {
         if (contextOptions) {
             e.preventDefault()
-            setSelectedElements([])
-            addSelectedElement(id)
+            if (!selectedElements.includes(id)) {
+                setSelectedElements([id])
+            }
             setContextMenuProps({ top: e.clientY, left: e.clientX, visible: true })
         }
     }
-
 
     const theme = useTheme()
 
 
     return (
-        <MainBox widthProp={width} heightProp={height}>
-            <TableBox contextVisible={contextMenuProps.visible}>
-                {true ?
-                    <LoadingIconBlur widthProp={width} heightProp={height}>
-                        <LoadingIconBox>
-                            <LoadingIconInsideBox>
-                                <PulseLoader size={30} color={theme.color.bgColor} />
-                            </LoadingIconInsideBox>
-                        </LoadingIconBox>
-                    </LoadingIconBlur>
-                    : undefined}
-                <StyledTable>
-                    <thead>
-                        <tr>
-                            {headers.map((header) =>
-                                <th key={`key_${header}`}>
-                                    {header}
-                                </th>
-                            )}
-                        </tr>
-                    </thead>
-                    <StyledTableBody isLoading={isLoading}>
-                        {data ? data.content.map((element) =>
-                            <RowSelectedStyle key={`element_${element.id}`} selected={selectedElements.includes(element.id)} onContextMenu={(e) => { onOpenContextMenu(e, element.id) }}>
+        <MainBox>
+            <TableWithPagBox>
+                <SearchBarBox>
+                    {searchKey !== undefined && setSearchKey ?
+                        <CoolSearchBar key='search_input' id='search' value={searchKey} setValue={setSearchKey} />
+                        :
+                        undefined
+                    }
+
+                </SearchBarBox>
+                <TableBox contextVisible={contextMenuProps.visible}>
+                    {isLoading ?
+                        <LoadingIconBlur>
+                            <LoadingIconBox>
+                                <LoadingIconInsideBox>
+                                    <PulseLoader size={30} color={theme.color.background.l1} />
+                                </LoadingIconInsideBox>
+                            </LoadingIconBox>
+                        </LoadingIconBlur>
+                        : undefined}
+
+                    <StyledTable>
+                        <thead>
+                            <tr>
                                 {headers.map((header) =>
-                                    <td key={`element_${element.id}_${header}`}>{element[header]}</td>
+                                    <TableHeader width={header.width} key={`key_${header.name}`}>
+                                        {t(`table.${id}.${header.name}`)}
+                                    </TableHeader>
                                 )}
-                            </RowSelectedStyle>)
-                            : <></>}
-                    </StyledTableBody>
-                </StyledTable>
-            </TableBox>
-            {setPage && data ?
-                <CoolPagination page={data?.page ? data.page : 0} setPage={setPage} totalPages={data?.totalPages} isLoading={isLoading} />
-                :
-                undefined
-            }
-            {contextOptions ?
-                <CoolContextMenu top={contextMenuProps.top} left={contextMenuProps.left} visible={contextMenuProps.visible} options={contextOptions} selectedElements={selectedElements}></CoolContextMenu>
-                : undefined
-            }
+                            </tr>
+                        </thead>
+                        <StyledTableBody isLoading={true}>
+                            {data?.content ? data.content.map((element) => {
+                                const isSelected = selectedElements?.includes(element.id)
+                                return <RowSelectedStyle key={`element_${element.id}`} isSelected={isSelected}
+                                    onContextMenu={(e) => { onOpenContextMenu(e, element.id) }}
+                                    onClick={() => onSelect(element.id)}>
+                                    {headers.map((header) =>
+                                        <td key={`element_${element.id}_${header.name}`}>{header.name ? element[header.name] : ''}</td>
+                                    )}
+                                </RowSelectedStyle>
+                            })
+                                : <></>}
+                        </StyledTableBody>
+                    </StyledTable>
+                </TableBox>
+                {setPage && page !== undefined ?
+                    <CoolPagination page={page} setPage={setPage} totalPages={data?.totalPages ? data?.totalPages : 0} isLoading={isLoading} />
+                    :
+                    undefined
+                }
+                {contextOptions ?
+                    <CoolContextMenu top={contextMenuProps.top} left={contextMenuProps.left} visible={contextMenuProps.visible} options={contextOptions} selectedElements={selectedElements}></CoolContextMenu>
+                    : undefined
+                }
+            </TableWithPagBox>
         </MainBox>
     )
 }

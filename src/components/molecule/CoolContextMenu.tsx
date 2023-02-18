@@ -1,12 +1,8 @@
-import React, { useRef } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { useClickOutside } from '../../hooks/useClickOutside';
-import { clearContextAtom } from '../../recoil/mainAtoms';
-
-import { device } from '../../StyledTheme';
-import { ContextOption } from '../../types/types';
-import { CoolContextOption } from '../atom/CoolContextOption';
+import { useMisc } from '../../hooks/useMisc';
+import { ContextOption, CoolContextOption } from '../atom/CoolContextOption';
 
 
 export interface ContextMenuPosition {
@@ -19,23 +15,24 @@ const MainBox = styled.div<ContextMenuPosition>`
     display: flex;
     cursor: default;
     flex-direction: column;
+    border-radius: 12px;
+    border: ${props => `1px solid ${props.theme.color.main.l3}`};
     position: absolute;
     width: 125px;
-    background: ${props => props.theme.color.lightBackground};
+    background: ${props => props.theme.color.background.n};
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     box-sizing: border-box;
     top: ${props => `${props.top}px`};
     left: ${props => `${props.left}px`};
-    @media ${device.desktopL} {
-    }
     z-index: 10;
 `;
 
 
 
-export function CoolContextMenu({ visible, top, left, options, selectedElements }: { visible: boolean, top: number, left: number, options: ContextOption[], selectedElements:string[]}) {
+export function CoolContextMenu({ visible, top, left, options, selectedElements }: { visible: boolean, top: number, left: number, options: ContextOption[], selectedElements: string[] }) {
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const setClearContext = useSetRecoilState<boolean>(clearContextAtom)
+
+    const { setClearContext } = useMisc()
 
     useClickOutside(wrapperRef, () => setClearContext((old) => !old));
 
@@ -43,7 +40,8 @@ export function CoolContextMenu({ visible, top, left, options, selectedElements 
         visible ?
             <MainBox ref={wrapperRef} top={top} left={left} visible={visible}>
                 {options.map((option) =>
-                    <CoolContextOption type={option.type} onClick={()=>option.onClick(selectedElements)}></CoolContextOption>
+                    <CoolContextOption key={option.type} type={option.type} disabled={selectedElements.length > 1 && !(option.multi)} 
+                        onClick={() => option.onClick(selectedElements)} label={option.label}></CoolContextOption>
                 )}
             </MainBox >
             : <></>

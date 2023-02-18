@@ -1,5 +1,5 @@
 import { ModalBase } from '../bases/ModalBase';
-import { IconTypeEnum, ModalButton, SizeEnum } from '../../types/types';
+import { SizeEnum } from '../../types/types';
 import { useState } from 'react';
 import { useModal } from '../../hooks/useModal';
 import { useTranslation } from 'react-i18next';
@@ -26,7 +26,7 @@ export function LModal() {
 
 
     return (
-        <ModalBase size={SizeEnum.L} buttons={buttons} onClose={() => { onClear() }} footerMessage={t(modalError)}>
+        <ModalBase size={SizeEnum.L} buttons={buttons} onClose={() => { onClear() }} >
         </ModalBase>
     )
 }

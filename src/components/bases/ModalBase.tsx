@@ -1,9 +1,8 @@
 import { ReactNode, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { device } from '../../StyledTheme';
-import { IconTypeEnum, SizeEnum } from '../../types/types';
-import { ModalButton } from '../../types/types'
-import { ButtonStyleEnum, CoolButton } from '../atom/CoolButton';
+import {SizeEnum } from '../../types/types';
+import { IconTypeEnum } from '../atom/CoolIcon';
 import { CoolIconButton } from '../atom/CoolIconButon';
 
 
@@ -108,7 +107,7 @@ const ModalBody = styled.div<ModalProps>`
     box-sizing: border-box;
     overflow-y: auto;
     flex-grow: 1;
-    color: ${props => props.theme.color.main.d7}
+    color: ${props => props.theme.color.main.d7};
     overflow-x: hidden;
     padding: 14px 20px;
     display:flex;

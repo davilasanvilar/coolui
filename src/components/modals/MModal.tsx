@@ -26,7 +26,7 @@ export function MModal() {
 
 
     return (
-        <ModalBase size={SizeEnum.M} buttons={buttons} onClose={() => { onClear() }} footerMessage={t(modalError)}>
+        <ModalBase size={SizeEnum.M} buttons={buttons} onClose={() => { onClear() }} >
         </ModalBase>
     )
 }

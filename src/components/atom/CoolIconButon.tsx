@@ -1,8 +1,8 @@
 import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
-import { IconTypeEnum, SizeEnum } from '../../types/types';
+import { SizeEnum } from '../../types/types';
 import { ButtonBase } from '../bases/ButtonBase';
-import { CoolIcon } from './CoolIcon';
+import { CoolIcon, IconTypeEnum } from './CoolIcon';
 import { ButtonStyleEnum } from './CoolButton';
 import { ThemeColors } from '../../styled';
 

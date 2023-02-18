@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { ModalType, RolEnum } from '../types/types';
+import { ModalType } from '../components/organism/CoolModal';
 
 
 export interface ModalContext {
@@ -24,7 +24,7 @@ export interface ModalProps {
 export interface ModalParams {
   body?: string
   elementId?: string
-  onConfirm?: () => Promise<void>
+  onConfirm?: (...args: any) => any;
 }
 
 const ModalContext = createContext<ModalContext>({} as any)

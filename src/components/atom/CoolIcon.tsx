@@ -11,7 +11,38 @@ import { TbFileAlert } from 'react-icons/tb';
 import { ImWarning } from 'react-icons/im';
 import { GrInProgress } from 'react-icons/gr';
 import { GoCheck } from 'react-icons/go';
-import { IconTypeEnum } from '../../types/types';
+
+export enum IconTypeEnum {
+    PREVIOUS,
+    NEXT,
+    LOGOUT,
+    CANCEL,
+    CONFIRM,
+    CLOSE,
+    USER,
+    LOGIN,
+    DELETE,
+    EDIT,
+    ADD,
+    CHECK,
+    SEARCH,
+    MAIL,
+    ARROW_NEXT,
+    ARROW_PREVIOUS,
+    PHONE,
+    DONWLOAD,
+    UPLOAD,
+    ALERT,
+    MAP,
+    PDF,
+    MEETING,
+    LOG,
+    FILE,
+    INCIDENCE,
+    PROGRESS,
+    IMPORTANT,
+    REDO,
+}
 
 
 const getIcon = (type: IconTypeEnum): JSX.Element => {

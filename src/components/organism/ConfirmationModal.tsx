@@ -1,10 +1,11 @@
 import { ModalBase } from './../bases/ModalBase';
-import { IconTypeEnum, ModalButton, SizeEnum } from '../../types/types';
+import { SizeEnum } from '../../types/types';
 import styled from 'styled-components';
 import { useModal } from '../../hooks/useModal';
 import { useTranslation } from 'react-i18next';
 import { useMisc } from '../../hooks/useMisc';
 import { CoolButton, ButtonStyleEnum } from '../atom/CoolButton';
+import { IconTypeEnum } from '../atom/CoolIcon';
 
 
 const StyledText = styled.p`

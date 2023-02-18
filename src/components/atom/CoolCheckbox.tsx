@@ -1,12 +1,8 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { IconTypeEnum, SelectOption, SizeEnum } from '../../types/types';
-import { SelectBase } from '../bases/SelectBase';
-import { device } from '../../StyledTheme';
-import { TextInputBase } from '../bases/TextInputBase';
+import { SizeEnum } from '../../types/types';
 import { CheckboxBase } from '../bases/CheckboxBase';
-import { BsCheck } from 'react-icons/bs';
-import { CoolIcon } from './CoolIcon';
+import { CoolIcon, IconTypeEnum } from './CoolIcon';
 
 
 interface MainSizeProps {

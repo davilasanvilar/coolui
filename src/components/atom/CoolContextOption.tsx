@@ -1,56 +1,62 @@
-import React, { useRef } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRef } from 'react';
 import styled from 'styled-components';
-import { clearContextAtom } from '../../recoil/mainAtoms';
-import { device } from '../../StyledTheme';
-import {IconTypeEnum } from '../../types/types';
-import { CoolIcon } from './CoolIcon';
+import { useMisc } from '../../hooks/useMisc';
+import { CoolIcon, IconTypeEnum } from './CoolIcon';
 
+export interface ContextOption {
+    type: IconTypeEnum;
+    label: string;
+    multi?: boolean;
+    onClick: (selectedElements: string[]) => any;
+}
 
-const MainBox = styled.div`
+interface ContextOptionProps {
+    disabled?: boolean
+}
+
+const MainBox = styled.div<ContextOptionProps>`
     display: flex;
+    gap: 4px;
     width: 100%;
-    background: ${props => props.theme.color.lightBackground};
+    background: ${props => props.disabled ? props.theme.color.background.l5 : props.theme.color.background.l1};
     box-sizing: border-box;
-    height: 6vh;
-    
-    padding: 1vh 10%;
-    justify-content:center;
+    min-height: 46px;
+    height: 46px;
+    padding: 14px 24px; 
     align-items: center;
+    color: ${props => props.disabled ? props.theme.color.main.lowOp : props.theme.color.main.d7};
+
+    &:first-child {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+
     &:not(:first-child) {
-        border-top: 1px solid ${props => props.theme.color.mainColorLowOp};
+        border-top: 1px solid ${props => props.theme.color.main.lowOp};
     }
-    color: ${props => props.theme.color.mainColor};
     &:hover {
-        color: ${props => props.theme.color.lightFont};
-        background-color: ${props => props.theme.color.buttonHover}
-    }
-    
-    @media ${device.desktop} {
-        height: 2vh;
+        color: ${props => props.disabled ? undefined : props.theme.color.main.d7};
+        background-color: ${props => props.disabled ? undefined : props.theme.color.main.l5};
     }
 `;
 
 const IconBox = styled.span`
-    display: flex;
-    width: 25%;
-    height: 5vh;
-    font-size: ${props => props.theme.fontSize.buttonText};
-    box-sizing: border-box;
-    align-items: center;
-    @media ${device.desktopL} {
-    }
+display: flex;
+font-size: ${props => props.theme.fontSize.highText};
+box-sizing: border - box;
+align-items: center;
 `;
 
 const LabelBox = styled.span`
-    display: flex;
-    width: 75%;
-    margin-left: 5%;
-    font-size: ${props => props.theme.fontSize.highText};
-    background-color: transparent;
-    box-sizing: border-box;
-    @media ${device.desktopL} {
-    }
+display: flex;
+font-size: ${props => props.theme.fontSize.regularText};
+background-color: transparent;
+box-sizing: border - box;
 `;
 
 interface IconLabel {
@@ -58,26 +64,14 @@ interface IconLabel {
     label: string
 }
 
-const getLabel = (type: IconTypeEnum) => {
-    switch (type) {
-        case IconTypeEnum.EDIT:
-            return 'Editar'
-        case IconTypeEnum.DELETE:
-            return 'Borrar'
-        default:
-            ''
-
-    }
-}
-
-export function CoolContextOption({ type, onClick }: { type: IconTypeEnum, onClick: () => void }) {
+export function CoolContextOption({ label, type, disabled, onClick }: { label: string, type: IconTypeEnum, disabled?: boolean, onClick: () => void }) {
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const setClearContext = useSetRecoilState<boolean>(clearContextAtom)
+    const { setClearContext } = useMisc()
 
     return (
-        <MainBox onClick={() => { setClearContext((old) => !old); onClick(); }}>
+        <MainBox disabled={disabled} onClick={disabled ? () => false : () => { setClearContext((old) => !old); onClick(); }}>
             <IconBox><CoolIcon type={type} /></IconBox>
-            <LabelBox>{getLabel(type)}</LabelBox>
+            <LabelBox>{label}</LabelBox>
         </MainBox>
     )
 }
