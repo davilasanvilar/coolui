@@ -8,6 +8,8 @@ import { CoolSearchBar } from '../atom/CoolSearchBar';
 import { useTranslation } from 'react-i18next';
 import { useMisc } from '../../hooks/useMisc';
 import { ContextOption } from '../atom/CoolContextOption';
+import { CoolTextInput } from '../atom/CoolTextInput';
+import { IconTypeEnum } from '../atom/CoolIcon';
 
 
 interface SizeProps {
@@ -164,9 +166,10 @@ const LoadingIconInsideBox = styled.div`
     top: 50%;`
 
 const SearchBarBox = styled.div`
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: space-between;
+    margin-bottom: 20px;
+    min-width: 250px;
+    width: 20%;
+    max-width: 100%;
 `
 
 export function CoolTable({ id, headers, data, setPage, contextOptions, isLoading, page, searchKey, setSearchKey }: {
@@ -215,7 +218,7 @@ export function CoolTable({ id, headers, data, setPage, contextOptions, isLoadin
             <TableWithPagBox>
                 <SearchBarBox>
                     {searchKey !== undefined && setSearchKey ?
-                        <CoolSearchBar key='search_input' id='search' value={searchKey} setValue={setSearchKey} />
+                        <CoolTextInput key='search_input' id='search' iconType={IconTypeEnum.SEARCH} value={searchKey} setValue={setSearchKey} />
                         :
                         undefined
                     }
