@@ -21,6 +21,8 @@ interface AllProps extends SizeProps {
 const MainBox = styled.div<MainSizeProps>`
     display: flex;
     align-items: center;
+    height: 46px;
+    min-height: 46px;
     width: ${props => `${props.totalWidth ? props.totalWidth : undefined}`};
 `;
 
