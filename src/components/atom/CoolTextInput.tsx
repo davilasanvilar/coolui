@@ -61,8 +61,8 @@ const CoolStyledTextInput = styled(TextInputBase) <AllProps>`
     
 `;
 
-export function CoolTextInput({ id, value, setValue, size, iconType, type = TextInputTypeEnum.TEXT, disabled = false, phonePrefix }: {
-    id: string, value: string, setValue: (value: string) => void, size?: SizeEnum, iconType?: IconTypeEnum, type?: TextInputTypeEnum, disabled?: boolean, phonePrefix?: string
+export function CoolTextInput({ id, value, setValue, iconType, type = TextInputTypeEnum.TEXT, disabled = false, phonePrefix }: {
+    id: string, value: string, setValue: (value: string) => void, iconType?: IconTypeEnum, type?: TextInputTypeEnum, disabled?: boolean, phonePrefix?: string
 }) {
 
     return (
