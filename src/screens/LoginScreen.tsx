@@ -1,23 +1,20 @@
-import React, { FC, ReactNode, useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ClipLoader } from 'react-spinners';
 import styled, { useTheme } from 'styled-components';
-import { ButtonBase } from '../components/bases/ButtonBase';
 import { useApi } from '../hooks/useApi';
 import { useAuth } from '../hooks/useAuth';
 import loginImg from './../../public/loginImg.png';
-import { FaSignInAlt } from 'react-icons/fa'
-import { TextInputBase, TextInputTypeEnum } from '../components/bases/TextInputBase';
+import { TextInputTypeEnum } from '../components/bases/TextInputBase';
 import { CoolTextInput } from '../components/atom/CoolTextInput';
 import { CoolFormElement } from '../components/atom/CoolFormElement';
 import { CoolButton } from '../components/atom/CoolButton';
-import { IconTypeEnum } from '../types/types';
+import { IconTypeEnum } from '../components/atom/CoolIcon';
 
 const MainBox = styled.div`
     display: flex;
     position:absolute;
     top: 0;
-    background: ${props => props.theme.color.mainColor};
+    background: ${props => props.theme.color.main.n};
     box-sizing: border-box;
     z-index: 80;
     padding: 1% 2%;
@@ -37,7 +34,7 @@ const LoginBox = styled.div`
     gap: 2vh;
     box-sizing: border-box;
     padding: 1% 2%;
-    background-color: ${props => props.theme.color.bgColor};
+    background-color: ${props => props.theme.color.background.n};
     width: 30%;
     padding: 10vh 0;
     height: 100vh;
@@ -118,7 +115,7 @@ export function LoginScreen() {
                     <CoolFormElement label='Contraseña'>
                         <CoolTextInput id={'password'} value={password} setValue={setPassword} type={TextInputTypeEnum.PASSWORD} />
                     </CoolFormElement>
-                    <LoginButton clickFun={() => onLogin()} type={IconTypeEnum.LOGIN} ></LoginButton>
+                    <LoginButton onClick={() => onLogin()} iconType={IconTypeEnum.LOGIN} ></LoginButton>
                 </LoginBox>
             </MainBox>
             : <></>

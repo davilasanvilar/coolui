@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Loading } from './components/atom/Loading';
+import { CoolLoading } from './components/atom/Loading';
 import { Header } from './components/organism/Header';
 import { useAuth } from './hooks/useAuth';
 import { Inicio } from './screens/Inicio';
-import { LoadingScreen } from './components/organism/LoadingScreen';
+import { CoolLoadingScreen } from './components/organism/CoolLoadingScreen';
 import styled from 'styled-components';
 import { LoginScreen } from './screens/LoginScreen';
 import { CoolModal } from './components/organism/CoolModal';
@@ -37,13 +37,13 @@ function Body() {
             <Routes>
               <Route path="/" element={<Inicio />} />
             </Routes>
-            <Loading />
+            <CoolLoading />
             <CoolModal />
             <ConfirmationModal />
             <CoolSnackbar/>
           </>
           :
-          <LoadingScreen />
+          <CoolLoadingScreen />
         }
         <LoginScreen />
 

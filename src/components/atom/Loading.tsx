@@ -1,18 +1,30 @@
 import { ClipLoader } from 'react-spinners';
-import { useTheme } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { useMisc } from '../../hooks/useMisc';
 
-export function Loading() {
+
+const MainBox = styled.div`
+    position: absolute;
+    width: 100%;
+    top:0;
+    display: flex;
+    height: 100vh;
+    & span {
+        margin:auto;
+    }
+`;
+
+export function CoolLoading() {
 
     const { isLoading } = useMisc()
     const theme = useTheme()
 
     return (
         isLoading ?
-            <div id='loading'>
+            <MainBox>
                 <ClipLoader color={theme.color.main.n}
-                    loading={isLoading} size={150} />
-            </div>
+                    loading={isLoading} size={100} />
+            </MainBox>
             :
             <></>
     )

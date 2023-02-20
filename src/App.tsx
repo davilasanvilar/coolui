@@ -1,5 +1,5 @@
 import Body from './Body';
-import { Loading } from './components/atom/Loading';
+import { CoolLoading } from './components/atom/Loading';
 import GlobalStyle from './globalStyles';
 import { ApiProvider } from './hooks/useApi';
 import { AuthProvider } from './hooks/useAuth';
@@ -18,7 +18,6 @@ function App() {
             <ModalProvider>
               <StyledTheme>
                 <GlobalStyle />
-                <Loading />
                 <Body />
               </StyledTheme>
             </ModalProvider>
