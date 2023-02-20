@@ -26,7 +26,7 @@ const CoolStyledSelect = styled(SelectBase) <AllProps>`
     border: 2px solid transparent;
     outline:none;
     &:focus {
-        border: 2px solid ${props => props.disabled ? undefined : props.theme.color.highlight.n};
+        border: 2px solid ${props => props.disabled ? undefined : props.theme.color.main.n};
         background-color: ${props => props.disabled ? undefined : props.theme.color.main.l5} ;
         transition: border .2s;
     }

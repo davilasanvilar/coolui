@@ -43,7 +43,7 @@ const CustomCheckbox = styled.div<AllProps>`
     }
     
     &:focus {
-        border: 2px solid ${props => props.theme.color.highlight.n} !important;
+        border: 2px solid ${props => props.theme.color.main.n} !important;
         transition: border .2s;
     }  
 `
