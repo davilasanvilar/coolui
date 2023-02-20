@@ -6,6 +6,7 @@ const MainBox = styled.div`
     display:flex;
     flex-wrap: wrap;
     width: 100%;
+    align-content: flex-start;
 `;
 
 export interface CoolFormField {
