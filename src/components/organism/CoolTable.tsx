@@ -173,7 +173,7 @@ const SearchBarBox = styled.div`
 export function CoolTable({ id, headers, data, setPage, contextOptions, isLoading, page, searchKey, setSearchKey }: {
     id: string, headers: HeaderData[], data?: Page<any>, page?: number,
     setPage?: React.Dispatch<React.SetStateAction<number>>, contextOptions?: ContextOption[], isLoading?: boolean,
-    sideButtons?: JSX.Element[], searchKey?: string, setSearchKey?: React.Dispatch<SetStateAction<string>>
+    searchKey?: string, setSearchKey?: React.Dispatch<SetStateAction<string>>
 }) {
 
 

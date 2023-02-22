@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { CoolLoading } from './components/atom/Loading';
+import { CoolLoading } from './components/atom/CoolLoading';
 import { Header } from './components/organism/Header';
 import { useAuth } from './hooks/useAuth';
 import { Inicio } from './screens/Inicio';

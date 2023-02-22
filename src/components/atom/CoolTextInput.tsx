@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { SizeEnum } from '../../types/types';
-import { device } from '../../StyledTheme';
 import { TextInputBase, TextInputTypeEnum } from '../bases/TextInputBase';
 import { CoolIcon, IconTypeEnum } from './CoolIcon';
 

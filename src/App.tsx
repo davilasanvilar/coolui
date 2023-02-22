@@ -1,5 +1,5 @@
 import Body from './Body';
-import { CoolLoading } from './components/atom/Loading';
+import { CoolLoading } from './components/atom/CoolLoading';
 import GlobalStyle from './globalStyles';
 import { ApiProvider } from './hooks/useApi';
 import { AuthProvider } from './hooks/useAuth';

@@ -31,12 +31,10 @@ const CoolStyledSelect = styled(SelectBase) <AllProps>`
         transition: border .2s;
     }
     transition: background .2s;
-    
     &:hover {
         transition: background .2s;
         background-color: ${props => props.disabled ? undefined : props.theme.color.main.l5} ;
-    }
-    
+    }   
 `;
 
 export function CoolSelect({ id, options, value, setValue, noEmpty, disabled }: {
