@@ -7,7 +7,7 @@ import { CoolIcon, IconTypeEnum } from './CoolIcon';
 import { ThemeColors } from '../../styled';
 
 export enum ButtonStyleEnum {
-    OUTLINED, FILLED,
+    OUTLINED, FILLED, TRANSPARENT
 }
 
 interface SizeProps {

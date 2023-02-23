@@ -6,12 +6,12 @@ import { device } from '../../StyledTheme';
 import { CoolIcon, IconTypeEnum } from './CoolIcon';
 import { ThemeColors } from '../../styled';
 
-export enum ButtonStyleEnum {
-    OUTLINED, FILLED,
+export enum ChipStyleEnum {
+    OUTLINED, FILLED
 }
 
 interface AllProps {
-    style?: ButtonStyleEnum
+    style?: ChipStyleEnum
     disabled?: boolean;
     color?: keyof ThemeColors;
 }
@@ -30,13 +30,13 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
         props.theme.color[props.color ? props.color : 'main'].l5
         :
         (
-            props.style === ButtonStyleEnum.FILLED ?
+            props.style === ChipStyleEnum.FILLED ?
                 props.theme.color[props.color ? props.color : 'main'].l3 :
                 'transparent')};
     outline:none;
-    color: ${props => props.style === ButtonStyleEnum.FILLED ?
+    color: ${props => props.style === ChipStyleEnum.FILLED ?
         props.theme.color.main.l7 : props.theme.color[props.color ? props.color : 'main'].l2};
-    border: ${props => props.style === ButtonStyleEnum.OUTLINED ? `2px solid ${props.theme.color[props.color ? props.color : 'main'].l3}}` : '2px solid transparent'};
+    border: ${props => props.style === ChipStyleEnum.OUTLINED ? `2px solid ${props.theme.color[props.color ? props.color : 'main'].l3}}` : '2px solid transparent'};
     display: flex;
     gap: 4px;
     align-items: center;
@@ -50,15 +50,15 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     &:hover {
         transition: background .2s;
         border-color: ${props => props.onClick ?
-        props.disabled ? undefined : (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined) : undefined} !important ;
+        props.disabled ? undefined : (props.style === ChipStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined) : undefined} !important ;
         color: ${props => props.onClick ?
-        props.disabled ? undefined : (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined) : undefined} !important;
+        props.disabled ? undefined : (props.style === ChipStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined) : undefined} !important;
         background: ${props => props.onClick ?
         props.disabled ?
             undefined
             :
             (
-                props.style === ButtonStyleEnum.FILLED ?
+                props.style === ChipStyleEnum.FILLED ?
                     props.theme.color[props.color ? props.color : 'main'].d1
                     :
                     undefined) : undefined};
@@ -69,9 +69,9 @@ const CoolStyledButton = styled(ButtonBase) <AllProps>`
     }
 `;
 
-export function CoolChip({ onClick, children, className, iconType, style = ButtonStyleEnum.FILLED, disabled = false, color }: {
+export function CoolChip({ onClick, children, className, iconType, style = ChipStyleEnum.FILLED, disabled = false, color }: {
     onClick?: MouseEventHandler<HTMLButtonElement>, children?: string | JSX.Element | JSX.Element[] | null, className?: string, iconType?: IconTypeEnum,
-    style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors
+    style?: ChipStyleEnum, disabled?: boolean, color?: keyof ThemeColors
 }) {
 
     return (

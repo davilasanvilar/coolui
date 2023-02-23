@@ -18,20 +18,17 @@ interface CoolStyledIconButtonProps extends SizeInfoProps {
 }
 
 const CoolStyledIconButton = styled(ButtonBase) <CoolStyledIconButtonProps>`
-    color: ${props => props.style === ButtonStyleEnum.FILLED ? props.theme.color.main.l6 : props.theme.color.main.n};
-    /* padding: ${props => `${props.width / 5}px`}; */
     border-radius: 50%;
-
     min-width: ${props => `${props.width}px`};
     min-height: ${props => `${props.width}px`};
     width: ${props => `${props.width}px`};
     height: ${props => `${props.width}px`};
     flex-shrink: 0;
-    color: ${props => props.style === ButtonStyleEnum.FILLED ?
-        props.theme.color.main.l7 : props.theme.color[props.color ? props.color : 'main'].l2};
+    color: ${props => props.style === ButtonStyleEnum.OUTLINED ?
+        props.theme.color[props.color ? props.color : 'main'].l2 : props.theme.color.main.l7};
     border: ${props => props.style === ButtonStyleEnum.OUTLINED ? `2px solid ${props.theme.color[props.color ? props.color : 'main'].l3}}` : '2px solid transparent'};
     font-size: 4rem;
-    background-color: ${props => props.disabled ?
+    background-color: ${props => props.style === ButtonStyleEnum.TRANSPARENT ? 'transparent' : props.disabled ?
         props.theme.color[props.color ? props.color : 'main'].l5
         :
         (
@@ -49,7 +46,7 @@ const CoolStyledIconButton = styled(ButtonBase) <CoolStyledIconButtonProps>`
         transition: background .2s;
         border-color: ${props => props.disabled ? undefined : (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined)} !important ;
         color: ${props => props.disabled ? undefined : (props.style === ButtonStyleEnum.OUTLINED ? props.theme.color[props.color ? props.color : 'main'].d1 : undefined)} !important;
-        background: ${props => props.disabled ?
+        background: ${props => props.style === ButtonStyleEnum.TRANSPARENT ? 'transparent' : props.disabled ?
         undefined
         :
         (
