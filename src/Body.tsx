@@ -10,6 +10,10 @@ import { CoolModal } from './components/organism/CoolModal';
 import { ConfirmationModal } from './components/organism/ConfirmationModal';
 import { device } from './StyledTheme';
 import { CoolSnackbar } from './components/atom/CoolSnackbar';
+import { CoolSidebar } from './components/organism/CoolSidebar';
+import { CoolSidebarOption } from './components/atom/CoolSidebarOption';
+import { IconTypeEnum } from './components/atom/CoolIcon';
+import { Ruta2 } from './screens/Ruta2';
 
 
 const MainBox = styled.div`
@@ -33,14 +37,27 @@ function Body() {
       <BrowserRouter>
         {authInfo.isCompletedLoad === true ?
           <>
+            <CoolSidebar options={[
+              <CoolSidebarOption id='opcion1' iconType={IconTypeEnum.CHECK} route={'/ruta2'} />,
+              <CoolSidebarOption id='opcion1' iconType={IconTypeEnum.ALERT}>
+                <CoolSidebarOption id='opcion1' iconType={IconTypeEnum.CHECK}>
+                  <CoolSidebarOption id='opcion1' iconType={IconTypeEnum.CHECK} />
+                  <CoolSidebarOption id='opcion1' iconType={IconTypeEnum.CHECK} />
+                  <CoolSidebarOption id='opcion1' iconType={IconTypeEnum.CHECK} />
+                </CoolSidebarOption>
+                <CoolSidebarOption id='opcion1' iconType={IconTypeEnum.CHECK} />
+                <CoolSidebarOption id='opcion1' iconType={IconTypeEnum.CHECK} />
+              </CoolSidebarOption>,
+              <CoolSidebarOption id='opcion1' iconType={IconTypeEnum.CLOSE} />]} />
             <Header />
             <Routes>
               <Route path="/" element={<Inicio />} />
+              <Route path="/ruta2" element={<Ruta2 />} />
             </Routes>
             <CoolLoading />
             <CoolModal />
             <ConfirmationModal />
-            <CoolSnackbar/>
+            <CoolSnackbar />
           </>
           :
           <CoolLoadingScreen />

@@ -1,16 +1,23 @@
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineFile, AiOutlineFilePdf, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineDelete, AiOutlineDown, AiOutlineEdit, AiOutlineFile, AiOutlineFilePdf, AiOutlineRight, AiOutlineSearch, AiOutlineUp } from 'react-icons/ai';
 import { BsArrowLeftShort, BsArrowRightShort, BsCheck, BsCheck2, BsMap } from 'react-icons/bs';
 import { CgCloseR } from 'react-icons/cg';
 import { FiMail } from 'react-icons/fi';
 import { FaCheck, FaRedo, FaRegListAlt, FaSignInAlt, FaUserCircle } from 'react-icons/fa';
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext, MdOutlineCancel } from 'react-icons/md';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
-import { IoMdAddCircleOutline, IoMdArrowRoundBack, IoMdArrowRoundForward, IoMdPeople, IoMdPhonePortrait } from 'react-icons/io';
+import { IoMdAddCircleOutline, IoMdArrowRoundBack, IoMdArrowRoundForward, IoMdPeople, IoMdPhonePortrait, IoIosMenu } from 'react-icons/io';
 import { BiDownload, BiUpload } from 'react-icons/bi';
 import { TbFileAlert } from 'react-icons/tb';
 import { ImWarning } from 'react-icons/im';
 import { GrInProgress } from 'react-icons/gr';
 import { GoCheck } from 'react-icons/go';
+
+
+
+
+
+
+
 
 export enum IconTypeEnum {
     PREVIOUS,
@@ -40,6 +47,9 @@ export enum IconTypeEnum {
     PROGRESS,
     IMPORTANT,
     REDO,
+    MENU,
+    UNFOLD,
+    FOLD
 }
 
 
@@ -97,6 +107,13 @@ const getIcon = (type: IconTypeEnum): JSX.Element => {
             return <GrInProgress />
         case IconTypeEnum.REDO:
             return <FaRedo />
+        case IconTypeEnum.MENU:
+            return <IoIosMenu />
+        case IconTypeEnum.FOLD:
+            return <AiOutlineRight />
+        case IconTypeEnum.UNFOLD:
+            return < AiOutlineDown />
+
         default:
             return <></>
     }
