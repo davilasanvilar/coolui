@@ -87,16 +87,16 @@ const getSize = (size?: SizeEnum): SizeProps => {
 
 
 
-export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, disabled = false, color }: {
+export function CoolButton({ onClick, children, className, iconType, size, style = ButtonStyleEnum.FILLED, disabled = false, color, tooltipId }: {
     onClick?: MouseEventHandler<HTMLButtonElement>, children?: string | JSX.Element | JSX.Element[] | null, className?: string, iconType?: IconTypeEnum,
-    size?: SizeEnum, style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors
+    size?: SizeEnum, style?: ButtonStyleEnum, disabled?: boolean, color?: keyof ThemeColors, tooltipId?:string
 }) {
 
     const sizeInfo = getSize(size)
 
     return (
         <CoolStyledButton disabled={disabled} className={className} width={sizeInfo.width}
-            onClick={onClick} style={style} color={color}>
+            onClick={onClick} style={style} color={color} tooltipId={tooltipId}>
             {iconType !== undefined ? <CoolIcon type={iconType} /> : <></>}
             <>
                 {children}

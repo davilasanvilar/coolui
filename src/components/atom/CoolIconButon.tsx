@@ -62,8 +62,9 @@ const CoolStyledIconButton = styled(ButtonBase) <CoolStyledIconButtonProps>`
     `;
 
 
-export function CoolIconButton({ onClick, className, type, size, disabled, style = ButtonStyleEnum.FILLED, color }: {
-    onClick?: MouseEventHandler<HTMLButtonElement>, className?: string, type: IconTypeEnum, size?: SizeEnum, disabled?: boolean, style?: ButtonStyleEnum, color?: keyof ThemeColors
+export function CoolIconButton({ onClick, className, type, size, disabled, style = ButtonStyleEnum.FILLED, color, tooltipId }: {
+    onClick?: MouseEventHandler<HTMLButtonElement>, className?: string, type: IconTypeEnum, size?: SizeEnum, disabled?: boolean, style?: ButtonStyleEnum,
+    color?: keyof ThemeColors, tooltipId?:string
 }) {
 
     const getSize = (): SizeInfoProps => {
@@ -84,7 +85,7 @@ export function CoolIconButton({ onClick, className, type, size, disabled, style
     const sizeInfo = getSize()
 
     return (
-        <CoolStyledIconButton className={className} width={sizeInfo.width} style={style} disabled={disabled} color={color} onClick={disabled ? undefined : onClick}>
+        <CoolStyledIconButton className={className} width={sizeInfo.width} style={style} disabled={disabled} color={color} onClick={disabled ? undefined : onClick} tooltipId={tooltipId}>
             <CoolIcon type={type} />
         </CoolStyledIconButton>
     )
